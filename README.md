@@ -14,5 +14,5 @@ Web de DRESAPLAST (Zuares del Páramo, León): catálogo de material de riego co
 - El asistente de averías funciona con respuestas guardadas (sin IA).
 
 ## Qué NO funciona en GitHub
-- El panel de **Gestión** (facturas, precios, averías) y la comparación diaria de precios necesitan la base de datos de la versión en Claude. En GitHub el panel se ve, pero no guarda.
+- La gestión interna (facturas, precios, averías) no está en esta web: va en un panel privado aparte, solo para el personal de DRESAPLAST.
 - Para actualizar productos, edita `data/productos.json`.

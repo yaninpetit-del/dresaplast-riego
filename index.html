@@ -350,7 +350,6 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
     <a class="opt" href="#averias" data-shop>Averías</a>
     <a class="opt" href="#empresa" data-shop>Empresa</a>
     <a class="opt" href="#contacto" data-shop>Contacto</a>
-    <a href="#panel" id="panelLink">Gestión</a>
     <button class="cartbtn" id="openCart">Pedido <b id="cartCount">0</b></button>
   </div>
 </nav>
@@ -508,107 +507,6 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
     <div>Precios con IVA incluido.<br>Comparados a diario con tiendas online de riego.</div>
     <div id="lastAnalysis">Último análisis de precios: —</div>
   </footer>
-</main>
-
-<!-- ============ PANEL ============ -->
-<main id="panel" class="hide">
-  <div class="ptitle">
-    <div><div class="eyebrow">Panel interno</div><h1>Gestión DRESAPLAST</h1></div>
-    <a class="btn ghost" href="#tienda">← Volver a la tienda</a>
-  </div>
-  <div id="panelNotice"></div>
-  <div class="tabs" id="tabs">
-    <button data-tab="resumen" class="on">Resumen</button>
-    <button data-tab="facturas">Facturación</button>
-    <button data-tab="precios">Precios y competencia</button>
-    <button data-tab="averias">Averías en fincas</button>
-  </div>
-
-  <section data-pane="resumen">
-    <div class="kpis" id="kpis"></div>
-    <div class="panelcard">
-      <h3>Facturación por mes</h3>
-      <div class="legend" id="chartLegend"></div>
-      <div id="chartWrap"></div>
-    </div>
-    <div class="panelcard">
-      <h3>Histórico por años</h3>
-      <div class="tw"><table id="yearTable"></table></div>
-    </div>
-  </section>
-
-  <section data-pane="facturas" class="hide">
-    <div class="panelcard">
-      <h3>Nueva factura</h3>
-      <form class="form" id="invForm">
-        <label>Nº factura<input name="numero" required></label>
-        <label>Fecha<input name="fecha" type="date" required></label>
-        <label>Cliente<input name="cliente" required></label>
-        <label>Concepto<input name="concepto"></label>
-        <label>Base imponible (€)<input name="base" type="number" step="0.01" required></label>
-        <label>IVA %<select name="iva"><option>21</option><option>10</option><option>4</option><option>0</option></select></label>
-        <label>Coste del material (€)<input name="coste" type="number" step="0.01" value="0"></label>
-        <label>Estado<select name="estado"><option value="pendiente">Pendiente de cobro</option><option value="cobrada">Cobrada</option></select></label>
-        <button class="sbtn" type="submit">Guardar factura</button>
-      </form>
-    </div>
-    <div class="panelcard">
-      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
-        <h3 style="margin:0;flex:1">Facturas</h3>
-        <select id="fYear" class="mini"></select>
-        <select id="fState" class="mini"><option value="">Todas</option><option value="pendiente">Pendientes</option><option value="cobrada">Cobradas</option></select>
-        <button class="mini" id="demoBtn">Cargar datos de ejemplo</button>
-        <button class="mini" id="demoDel">Borrar ejemplos</button>
-      </div>
-      <div class="tw"><table id="invTable"></table></div>
-    </div>
-  </section>
-
-  <section data-pane="precios" class="hide">
-    <div class="panelcard">
-      <h3>Regla automática de precios</h3>
-      <p style="color:var(--ink2);margin-bottom:14px;font-size:16px">Cada día se revisan los precios de la competencia. Tu precio = el más barato encontrado menos el descuento. Si con eso bajas del coste + margen mínimo, se queda en el margen mínimo y te avisa.</p>
-      <form class="form" id="cfgForm">
-        <label>Más barato que la competencia (%)<input name="descuento" type="number" min="0" max="50" step="0.5"></label>
-        <label>Margen mínimo sobre coste (%)<input name="margenMin" type="number" min="0" max="200" step="1"></label>
-        <button class="sbtn" type="submit">Guardar regla</button>
-      </form>
-      <p id="analysisInfo" style="margin-top:14px;font-size:15px;color:var(--muted)"></p>
-    </div>
-    <div class="panelcard">
-      <h3>Precios por pieza</h3>
-      <div class="tw"><table id="priceTable"></table></div>
-    </div>
-    <div class="panelcard">
-      <h3>Lo que más se vende en la competencia</h3>
-      <div id="topSellers" style="font-size:16px;color:var(--ink2)">Aparecerá tras el primer análisis diario.</div>
-    </div>
-  </section>
-
-  <section data-pane="averias" class="hide">
-    <div class="panelcard">
-      <h3>Nuevo parte de avería</h3>
-      <form class="form" id="avForm">
-        <label>Finca<input name="finca" required></label>
-        <label>Cliente<input name="cliente" required></label>
-        <label>Municipio<input name="municipio"></label>
-        <label>Tipo<select name="tipo">
-          <option>Electroválvula no abre/cierra</option><option>Programador</option><option>Aspersor no gira</option>
-          <option>Goteros obstruidos</option><option>Baja presión</option><option>Fuga en tubería</option><option>Filtro colmatado</option><option>Bomba / grupo de presión</option><option>Otro</option>
-        </select></label>
-        <label>Prioridad<select name="prioridad"><option>Normal</option><option>Urgente</option><option>Baja</option></select></label>
-        <label>Técnico<input name="tecnico"></label>
-        <label style="grid-column:1/-1">Descripción<textarea name="desc" rows="2"></textarea></label>
-        <button class="sbtn" type="submit">Abrir parte</button>
-      </form>
-    </div>
-    <div class="kanban" id="kanban"></div>
-    <div class="panelcard" style="margin-top:18px">
-      <h3>Averías recurrentes</h3>
-      <p style="font-size:15px;color:var(--muted);margin-bottom:12px">Las más repetidas son las que el asistente debe resolver antes de que llegue la llamada.</p>
-      <div class="bars" id="avStats"></div>
-    </div>
-  </section>
 </main>
 
 <!-- cart -->
@@ -1193,139 +1091,9 @@ fileIn.onchange=async()=>{const f=fileIn.files[0];if(!f||!photoTarget)return;if(
     toast("Foto guardada");}catch(err){toast("No se pudo subir la foto")}};
 
 /* ================= ROUTER ================= */
-function route(){
-  const h=location.hash.replace("#","");
-  const panel=h.startsWith("panel");
-  $("#tienda").classList.toggle("hide",panel);
-  $("#panel").classList.toggle("hide",!panel);
-  $("#botfab").classList.toggle("hide",panel||$("#bot").classList.contains("on"));
-  $$("[data-shop]").forEach(a=>a.classList.toggle("hide",panel));
-  $("#nav").classList.toggle("solid",panel||scrollY>40);
-  if(panel){bot(false);$("#botfab").classList.add("hide");scrollTo(0,0);renderPanel();}
-}
-addEventListener("hashchange",route);
+function route(){ $("#nav").classList.toggle("solid",scrollY>40); }
 
-/* ================= PANEL ================= */
-let tab="resumen";
-$("#tabs").onclick=e=>{const b=e.target.closest("[data-tab]");if(!b)return;tab=b.dataset.tab;$$("#tabs button").forEach(x=>x.classList.toggle("on",x===b));$$("[data-pane]").forEach(p=>p.classList.toggle("hide",p.dataset.pane!==tab));renderPanel()};
-
-function renderPanel(){
-  const n=$("#panelNotice");
-  if(!S.db) n.innerHTML=`<div class="notice">El panel guarda los datos en la nube de esta página. Ábrela con tu cuenta de Claude para ver y editar facturas, precios y averías.</div>`;
-  else if(!S.canEdit) n.innerHTML=`<div class="notice">Tienes acceso de solo lectura. Las facturas y averías solo las ven y editan los responsables de DRESAPLAST.</div>`;
-  else n.innerHTML="";
-  renderKPIs();renderInvoices();renderPrices();renderAverias();
-}
-
-/* --- facturación --- */
-const tot = f => (+f.base||0)*(1+(+f.iva||0)/100);
-function byYear(){const m={};S.facturas.forEach(f=>{const y=(f.fecha||"").slice(0,4);if(!y)return;(m[y]=m[y]||{base:0,coste:0,n:0,total:0,pend:0});m[y].base+=+f.base||0;m[y].coste+=+f.coste||0;m[y].n++;m[y].total+=tot(f);if(f.estado!=="cobrada")m[y].pend+=tot(f)});return m}
-function renderKPIs(){
-  const now=new Date(), Y=now.getFullYear(), md=(now.getMonth()+1)*100+now.getDate();
-  const inYTD=(f,y)=>f.fecha&&+f.fecha.slice(0,4)===y&&(+f.fecha.slice(5,7))*100+(+f.fecha.slice(8,10))<=md;
-  const cur=S.facturas.filter(f=>inYTD(f,Y)), prev=S.facturas.filter(f=>inYTD(f,Y-1));
-  const sb=a=>a.reduce((s,f)=>s+(+f.base||0),0), sc=a=>a.reduce((s,f)=>s+(+f.coste||0),0);
-  const c=sb(cur),p=sb(prev),var_=p?((c-p)/p*100):null, ben=c-sc(cur), benP=p-sc(prev);
-  const pend=S.facturas.filter(f=>f.estado!=="cobrada").reduce((s,f)=>s+tot(f),0);
-  $("#kpis").innerHTML=[
-    ["Facturado "+Y+" (base)",eur0(c),var_==null?"Sin datos del año anterior":`<span class="${var_>=0?"up":"down"}">${var_>=0?"▲":"▼"} ${Math.abs(var_).toFixed(1)}%</span> vs mismo periodo ${Y-1}`],
-    ["Mismo periodo "+(Y-1),eur0(p),"hasta "+now.toLocaleDateString("es-ES",{day:"numeric",month:"short"})],
-    ["Beneficio "+Y,eur0(ben),c?`Margen ${(ben/c*100).toFixed(1)}% · ${Y-1}: ${eur0(benP)}`:"—"],
-    ["Pendiente de cobro",eur0(pend),S.facturas.filter(f=>f.estado!=="cobrada").length+" facturas (IVA incl.)"]
-  ].map(([k,v,s])=>`<div class="kpi"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
-  // chart
-  const months=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
-  const ser=y=>months.map((_,i)=>S.facturas.filter(f=>f.fecha&&+f.fecha.slice(0,4)===y&&+f.fecha.slice(5,7)===i+1).reduce((s,f)=>s+(+f.base||0),0));
-  const a=ser(Y-1),b=ser(Y), mx=Math.max(1,...a,...b);
-  const C1="#C98A2E",C2="#2B6CB0";
-  $("#chartLegend").innerHTML=`<span><i style="background:${C1}"></i>${Y-1}</span><span><i style="background:${C2}"></i>${Y}</span>`;
-  const Wc=900,Hc=280,pl=60,pb=28,pt=10,cw=(Wc-pl-10)/12,bw=Math.min(22,(cw-10)/2);
-  const nice=Math.pow(10,Math.floor(Math.log10(mx))), top=Math.ceil(mx/nice)*nice;
-  const yv=v=>pt+(Hc-pt-pb)*(1-v/top);
-  let g="";
-  for(let i=0;i<=4;i++){const v=top*i/4,y=yv(v);g+=`<line x1="${pl}" x2="${Wc-10}" y1="${y}" y2="${y}" stroke="rgba(28,42,34,.09)"/><text x="${pl-8}" y="${y+4}" text-anchor="end">${v>=1000?(v/1000).toLocaleString("es-ES",{maximumFractionDigits:1})+"k":v.toFixed(0)}</text>`}
-  const bar=(x,v,c,lab)=>{const y=yv(v),h=Math.max(0,yv(0)-y);if(h<=0)return"";const r=Math.min(4,h,bw/2);return `<path d="M${x} ${y+h}V${y+r}q0 -${r} ${r} -${r}h${bw-2*r}q${r} 0 ${r} ${r}V${y+h}z" fill="${c}"/>`};
-  months.forEach((m,i)=>{const x=pl+i*cw+(cw-2*bw-2)/2;g+=bar(x,a[i],C1)+bar(x+bw+2,b[i],C2);g+=`<rect x="${pl+i*cw}" y="${pt}" width="${cw}" height="${Hc-pt-pb}" fill="transparent" data-tip="${m}: ${Y-1} ${eur(a[i])} · ${Y} ${eur(b[i])}"/><text x="${pl+i*cw+cw/2}" y="${Hc-8}" text-anchor="middle">${m}</text>`});
-  $("#chartWrap").innerHTML=S.facturas.length?`<svg class="chart" viewBox="0 0 ${Wc} ${Hc}">${g}</svg>`:`<p style="color:var(--muted)">Aún no hay facturas. Añádelas en Facturación o carga datos de ejemplo para ver cómo queda.</p>`;
-  // years
-  const ys=byYear(), ks=Object.keys(ys).sort().reverse();
-  $("#yearTable").innerHTML=`<tr><th>Año</th><th class="n">Facturas</th><th class="n">Base</th><th class="n">Total con IVA</th><th class="n">Coste</th><th class="n">Beneficio</th><th class="n">Margen</th><th class="n">Pendiente</th></tr>`+
-   (ks.length?ks.map(y=>{const d=ys[y],bn=d.base-d.coste;return `<tr><td><b>${y}</b></td><td class="n">${d.n}</td><td class="n">${eur(d.base)}</td><td class="n">${eur(d.total)}</td><td class="n">${eur(d.coste)}</td><td class="n">${eur(bn)}</td><td class="n">${d.base?(bn/d.base*100).toFixed(1)+"%":"—"}</td><td class="n">${eur(d.pend)}</td></tr>`}).join(""):`<tr><td colspan="8" style="color:var(--muted)">Sin datos todavía.</td></tr>`);
-}
-document.addEventListener("pointermove",e=>{const t=e.target.closest&&e.target.closest("[data-tip]"),tip=$("#tip");if(t){tip.textContent=t.dataset.tip;tip.style.left=Math.min(innerWidth-260,e.clientX+14)+"px";tip.style.top=(e.clientY+14)+"px";tip.style.opacity=1}else tip.style.opacity=0});
-
-function renderInvoices(){
-  const years=[...new Set(S.facturas.map(f=>(f.fecha||"").slice(0,4)).filter(Boolean))].sort().reverse();
-  const fy=$("#fYear"),cur=fy.value;fy.innerHTML=`<option value="">Todos los años</option>`+years.map(y=>`<option ${y===cur?"selected":""}>${y}</option>`).join("");
-  const st=$("#fState").value;
-  const list=S.facturas.filter(f=>(!fy.value||f.fecha?.startsWith(fy.value))&&(!st||f.estado===st)).sort((a,b)=>(b.fecha||"").localeCompare(a.fecha||""));
-  $("#invTable").innerHTML=`<tr><th>Nº</th><th>Fecha</th><th>Cliente</th><th>Concepto</th><th class="n">Base</th><th class="n">Total</th><th class="n">Beneficio</th><th>Estado</th><th></th></tr>`+
-   (list.length?list.map(f=>`<tr><td>${esc(f.numero)}${f.demo?' <span class="pill warn">ejemplo</span>':""}</td><td>${esc(f.fecha)}</td><td>${esc(f.cliente)}</td><td>${esc(f.concepto)}</td><td class="n">${eur(+f.base)}</td><td class="n">${eur(tot(f))}</td><td class="n">${eur((+f.base||0)-(+f.coste||0))}</td>
-    <td><span class="pill ${f.estado==="cobrada"?"ok":"warn"}">${f.estado==="cobrada"?"Cobrada":"Pendiente"}</span></td>
-    <td style="white-space:nowrap">${S.canEdit?`<button class="mini" data-pay="${f._id}">${f.estado==="cobrada"?"Marcar pendiente":"Marcar cobrada"}</button> <button class="mini" data-delinv="${f._id}">Borrar</button>`:""}</td></tr>`).join(""):`<tr><td colspan="9" style="color:var(--muted)">No hay facturas con este filtro.</td></tr>`);
-  const form=$("#invForm"); if(!form.fecha.value) form.fecha.value=new Date().toISOString().slice(0,10);
-  if(!form.numero.value){const y=new Date().getFullYear();const n=S.facturas.filter(f=>f.fecha?.startsWith(y)&&!f.demo).length+1;form.numero.value=`F${y}-${String(n).padStart(4,"0")}`}
-}
-$("#fYear").onchange=renderInvoices;$("#fState").onchange=renderInvoices;
-$("#invForm").onsubmit=async e=>{e.preventDefault();if(!guard())return;const f=Object.fromEntries(new FormData(e.target));
-  const d={numero:f.numero,fecha:f.fecha,cliente:f.cliente,concepto:f.concepto,base:+f.base,iva:+f.iva,coste:+f.coste||0,estado:f.estado,creada:new Date().toISOString()};
-  try{await S.db.collection("facturas").add(d);e.target.reset();toast("Factura guardada")}catch(err){toast(dbErr(err))}};
-document.addEventListener("click",async e=>{
-  const p=e.target.closest("[data-pay]");if(p&&guard()){const f=S.facturas.find(x=>x._id===p.dataset.pay);try{await S.db.doc("facturas/"+f._id).update({estado:f.estado==="cobrada"?"pendiente":"cobrada"})}catch(err){toast(dbErr(err))}}
-  const d=e.target.closest("[data-delinv]");if(d&&guard()){if(d.dataset.sure){try{await S.db.doc("facturas/"+d.dataset.delinv).delete();toast("Factura borrada")}catch(err){toast(dbErr(err))}}else{d.dataset.sure=1;d.textContent="¿Seguro?";setTimeout(()=>{delete d.dataset.sure;d.textContent="Borrar"},3000)}}
-});
-$("#demoBtn").onclick=async()=>{if(!guard())return;
-  const clientes=["Explotación Ganadera Valdés","SAT Vega del Esla","Finca Los Barrios","Agropecuaria Órbigo","Hnos. Fernández (Astorga)","Granja La Bañeza","Comunidad de Regantes Páramo"];
-  const Y=new Date().getFullYear(); let k=0; const ops=[];
-  for(const y of [Y-2,Y-1,Y]){for(let m=1;m<=12;m++){ if(y===Y&&m>new Date().getMonth()+1)break; const seas=[.4,.45,.7,1.2,1.6,1.8,1.7,1.3,.9,.6,.45,.4][m-1]*(y===Y?1.12:y===Y-1?1:.9);
-    for(let i=0;i<3;i++){const base=Math.round((900+Math.random()*1800)*seas*100)/100;k++;
-      ops.push({numero:`EJ-${y}-${String(k).padStart(3,"0")}`,fecha:`${y}-${String(m).padStart(2,"0")}-${String(3+i*9).padStart(2,"0")}`,cliente:clientes[k%clientes.length],concepto:"Material de riego",base,iva:21,coste:Math.round(base*(.58+Math.random()*.12)*100)/100,estado:(y<Y||m<new Date().getMonth())?"cobrada":(i?"pendiente":"cobrada"),demo:true})}}}
-  toast("Cargando ejemplos…");
-  for(const d of ops){try{await S.db.collection("facturas").add(d)}catch(err){toast(dbErr(err));return}}
-  toast("Datos de ejemplo cargados")};
-$("#demoDel").onclick=async()=>{if(!guard())return;const l=S.facturas.filter(f=>f.demo);for(const f of l){try{await S.db.doc("facturas/"+f._id).delete()}catch(e){}}toast(l.length+" ejemplos borrados")};
-
-/* --- precios --- */
-function renderPrices(){
-  const f=$("#cfgForm"); if(document.activeElement?.form!==f){f.descuento.value=S.cfg.descuento;f.margenMin.value=S.cfg.margenMin}
-  const a=S.analisis;
-  $("#analysisInfo").innerHTML=a?.fecha?`Último análisis automático: <b>${new Date(a.fecha).toLocaleString("es-ES")}</b>. ${esc(a.resumen||"")}`:"Datos iniciales de la investigación del 6 de noviembre de 2026. El análisis automático diario los irá actualizando.";
-  $("#priceTable").innerHTML=`<tr><th>Foto</th><th>Pieza</th><th>Competencia</th><th class="n">Más barato</th><th class="n">Tu coste</th><th class="n">Tu precio</th><th class="n">Margen</th><th>Estado</th></tr>`+
-   S.productos.map(p=>{const pr=pricing(p);const comps=(p.competidores||[]).slice().sort((x,y)=>x.precio-y.precio);
-    const st=pr.precio==null?`<span class="pill warn">Sin datos</span>`:pr.protegido?`<span class="pill bad">En margen mínimo</span>`:!(p.coste>0)?`<span class="pill warn">Falta coste</span>`:`<span class="pill ok">−${S.cfg.descuento}% vs competencia</span>`;
-    const mg=(pr.precio&&p.coste>0)?(((pr.precio/1.21)-p.coste)/(pr.precio/1.21)*100).toFixed(1)+"%":"—";
-    return `<tr><td>${p.fotoId?`<img src="${imgSrc(p.fotoId)}" alt="" style="width:56px;height:42px;object-fit:contain;background:#fff;border-radius:6px;border:1px solid var(--line)">`:""}${S.canUpload?`<br><button class="mini" data-photo="${esc(p.id)}">${p.fotoId?"Cambiar":"Subir"}</button>`:""}</td><td><b>${esc(p.nombre)}</b></td><td style="font-size:14px">${comps.map(c=>`${c.url?`<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.tienda)}</a>`:esc(c.tienda)}: ${eur(c.precio)}`).join("<br>")||"—"}</td>
-     <td class="n">${eur(pr.min)}</td>
-     <td class="n">${S.canEdit?`<input class="mini" style="width:90px;text-align:right" type="number" step="0.01" placeholder="sin IVA" value="${p.coste??""}" data-cost="${esc(p.id)}">`:eur(p.coste)}</td>
-     <td class="n"><b>${eur(pr.precio)}</b></td><td class="n">${mg}</td><td>${st}</td></tr>`}).join("");
-  const ts=a?.masVendidos||[];
-  if(ts.length) $("#topSellers").innerHTML=`<ol style="padding-left:20px">${ts.map(t=>`<li>${esc(t.nombre||t)}${t.donde?` <span style="color:var(--muted)">· ${esc(t.donde)}</span>`:""}</li>`).join("")}</ol>`;
-}
-$("#cfgForm").onsubmit=async e=>{e.preventDefault();if(!guard())return;const f=new FormData(e.target);const d={descuento:+f.get("descuento"),margenMin:+f.get("margenMin")};
-  try{await S.db.doc("config/precios").set(d);toast("Regla guardada · precios recalculados")}catch(err){toast(dbErr(err))}};
-document.addEventListener("change",async e=>{const c=e.target.dataset?.cost;if(!c||!guard())return;const v=e.target.value===""?null:+e.target.value;
-  try{await S.db.doc("productos/"+c).update({coste:v});toast("Coste guardado (precio de coste sin IVA; el margen se calcula sobre el precio sin IVA)")}catch(err){toast(dbErr(err))}});
-
-/* --- averías --- */
-const COLS=[["nueva","Nuevas"],["curso","En curso"],["resuelta","Resueltas"]];
-function renderAverias(){
-  $("#kanban").innerHTML=COLS.map(([k,n])=>{const l=S.averias.filter(a=>(a.estado||"nueva")===k).sort((a,b)=>(a.prioridad==="Urgente"?-1:0)-(b.prioridad==="Urgente"?-1:0)||(b.creada||"").localeCompare(a.creada||""));
-   return `<div class="col"><h4>${n} · ${l.length}</h4>${l.map(a=>`<div class="av"><b>${esc(a.finca)}</b><div class="meta">${esc(a.cliente)}${a.municipio?" · "+esc(a.municipio):""} · ${new Date(a.creada).toLocaleDateString("es-ES")}</div>
-    <span class="pill ${a.prioridad==="Urgente"?"bad":a.prioridad==="Baja"?"ok":"warn"}">${esc(a.prioridad)}</span> <span style="font-size:14px">${esc(a.tipo)}</span>
-    ${a.desc?`<div style="margin-top:6px;color:var(--ink2)">${esc(a.desc)}</div>`:""}${a.tecnico?`<div class="meta">Técnico: ${esc(a.tecnico)}</div>`:""}
-    ${S.canEdit?`<div class="acts">${COLS.filter(c=>c[0]!==k).map(c=>`<button class="mini" data-mv="${a._id}" data-to="${c[0]}">→ ${c[1]}</button>`).join("")}<button class="mini" data-delav="${a._id}">Borrar</button></div>`:""}</div>`).join("")||`<p style="color:var(--muted);font-size:14px;padding:6px">Nada por aquí.</p>`}</div>`}).join("");
-  const cnt={};S.averias.forEach(a=>cnt[a.tipo]=(cnt[a.tipo]||0)+1);const ent=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);const mx=Math.max(1,...ent.map(e=>e[1]));
-  $("#avStats").innerHTML=ent.length?ent.map(([t,n])=>`<div class="r"><span>${esc(t)}</span><span class="t"><i style="width:${n/mx*100}%"></i></span><b>${n}</b></div>`).join(""):`<p style="color:var(--muted)">Cuando registres averías verás aquí cuáles se repiten.</p>`;
-}
-$("#avForm").onsubmit=async e=>{e.preventDefault();if(!guard())return;const d=Object.fromEntries(new FormData(e.target));d.estado="nueva";d.creada=new Date().toISOString();
-  try{await S.db.collection("averias").add(d);e.target.reset();toast("Parte abierto")}catch(err){toast(dbErr(err))}};
-document.addEventListener("click",async e=>{
-  const m=e.target.closest("[data-mv]");if(m&&guard()){try{await S.db.doc("averias/"+m.dataset.mv).update({estado:m.dataset.to,actualizada:new Date().toISOString()})}catch(err){toast(dbErr(err))}}
-  const d=e.target.closest("[data-delav]");if(d&&guard()){if(d.dataset.sure){try{await S.db.doc("averias/"+d.dataset.delav).delete()}catch(err){toast(dbErr(err))}}else{d.dataset.sure=1;d.textContent="¿Seguro?";setTimeout(()=>{delete d.dataset.sure;d.textContent="Borrar"},3000)}}
-});
-
-function guard(){if(!S.db){toast("Abre la página con tu cuenta para guardar");return false}if(!S.canEdit){toast("Solo los responsables pueden editar");return false}return true}
-function dbErr(e){return e?.code==="quota_exceeded"?"Base de datos llena: borra registros antiguos":e?.code==="invalid_argument"?"No tienes permiso para guardar esto":"No se pudo guardar, inténtalo de nuevo"}
+function renderPanel(){} function renderPrices(){} function renderKPIs(){} function renderInvoices(){} function renderAverias(){}
 
 /* ================= ARRANQUE ================= */
 renderShop();renderCart();route();
@@ -1338,19 +1106,16 @@ renderShop();renderCart();route();
     return;}
   claude.use("sample").then(s=>{if(s){S.sample=s;$("#botMode").textContent="Con IA · resuelve averías paso a paso"}}).catch(()=>{});
   const [db,user]=await Promise.all([claude.use("db").catch(()=>null),claude.use("user").catch(()=>null)]);
-  if(!db){renderPanel();return}
+  if(!db){return}
   S.db=db;
   try{ if(user){ const ce=await user.canEdit(); S.canEdit = ce===null||ce===undefined ? true : !!ce; } }catch(e){}
   if(!user) S.canEdit=true; // sin información de nivel: se intenta y el servidor decide
-  try{const as=await claude.use("assets");if(as&&S.canEdit){S.assets=as;S.canUpload=true;renderShop();}}catch(e){}
+  
   const loadT=setTimeout(()=>toast("Los datos tardan en llegar; puede que veas precios de la última carga"),10000);
   db.collection("productos").onSnapshot(s=>{clearTimeout(loadT);if(!s.empty){const ord=FALLBACK.map(p=>p.id);S.productos=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>((ord.indexOf(a.id)+1||999)-(ord.indexOf(b.id)+1||999))||String(a.nombre).localeCompare(String(b.nombre),'es',{numeric:true}));renderShop();renderCart();renderPrices()}},()=>{});
   db.doc("config/precios").onSnapshot(s=>{if(s.exists){S.cfg={...S.cfg,...s.data()};renderShop();renderCart();renderPrices()}},()=>{});
   db.doc("config/web").onSnapshot(s=>{S.heroFotoId=s.exists?s.data().heroFotoId||null:null;renderShop()},()=>{});
   db.doc("analisis/ultimo").onSnapshot(s=>{if(s.exists){S.analisis=s.data();renderShop();renderPrices()}},()=>{});
-  db.collection("facturas").onSnapshot(s=>{S.facturas=s.docs.map(d=>({_id:d.id,...d.data()}));if(!$("#panel").classList.contains("hide")){renderKPIs();renderInvoices()}},()=>{});
-  db.collection("averias").onSnapshot(s=>{S.averias=s.docs.map(d=>({_id:d.id,...d.data()}));if(!$("#panel").classList.contains("hide"))renderAverias()},()=>{});
-  renderPanel();
 })();
 </script>
 
