@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DRESAPLAST · Riego para fincas de León</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF; --paper2:#F1F3F2; --ink:#15211B; --ink2:#46544C; --muted:#76837B;
+  --field:#14352A; --field2:#22513F; --water:#2B6CB0; --water2:#9CC3E6; --wheat:#C98A2E;
+  --line:rgba(21,33,27,.12); --card:#FFFFFF; --ok:#2F7D4F; --warn:#B7791F; --bad:#B23A30;
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:Archivo,Inter,sans-serif;font-weight:700;letter-spacing:-.02em}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+.hide{display:none!important}
+
+/* NAV */
+nav.top{position:fixed;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line);inset:0 0 auto 0;z-index:40;display:flex;align-items:center;gap:22px;padding:14px clamp(16px,4vw,48px);transition:background .3s,box-shadow .3s}
+nav.top.solid{background:rgba(245,241,232,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.08em;font-size:15px;text-decoration:none}
+.brand svg{width:30px;height:30px}
+.brand small{display:block;font-weight:500;letter-spacing:.02em;color:var(--ink2);font-size:12px}
+nav.top .links{margin-left:auto;display:flex;gap:4px;align-items:center}
+nav.top .links a{text-decoration:none;font-size:15px;font-weight:600;padding:8px 12px;border-radius:999px}
+nav.top .links a:hover{background:rgba(31,59,45,.08)}
+.cartbtn{display:flex;align-items:center;gap:8px;background:var(--field);color:#fff;padding:9px 16px;border-radius:999px;font-weight:600;font-size:15px}
+.cartbtn b{background:var(--wheat);border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:12px}
+@media(max-width:820px){nav.top .links a.opt{display:none}}
+
+/* HERO */
+.hero{padding:96px clamp(16px,5vw,64px) 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:center;max-width:1400px;margin:0 auto}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:13px;font-weight:700;color:var(--field2)}
+.hero h1{font-size:clamp(38px,5.4vw,72px);line-height:1.02;margin:12px 0 18px}
+.hero h1 em{font-style:normal;color:var(--water)}
+.hero p{font-size:clamp(17px,1.6vw,20px);max-width:560px;color:var(--ink2)}
+.hero .cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:12px;font-weight:600;text-decoration:none;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn.dark{background:var(--field);color:#fff}
+.btn.ghost{border:1.5px solid var(--field);color:var(--field)}
+.trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:28px;font-size:15px;color:var(--ink2)}
+.trust span{display:flex;align-items:center;gap:8px}
+.trust i{width:8px;height:8px;border-radius:50%;background:var(--field2);display:inline-block}
+.heroimg{position:relative;aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:var(--paper2);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px}
+.heroimg.one{display:block}
+.heroimg img{width:100%;height:100%;object-fit:cover;display:block}
+.heroimg .tile{background:#fff;display:grid;place-items:center;position:relative}
+.heroimg .tile img{object-fit:contain;padding:10%}
+.heroimg .tile svg{width:42%;height:42%;opacity:.55}
+.heroimg .tile b{position:absolute;left:12px;bottom:10px;font-size:13px;color:var(--ink2);font-weight:600}
+.photoedit{position:absolute;right:12px;top:12px;background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:10px;padding:7px 12px;font-size:13px;font-weight:700;z-index:2}
+@media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:96px}}
+@media(max-width:600px){.brand small{display:none}.trust{gap:10px 18px}}
+/* INTRO ASPERSOR */
+#intro{height:150vh;position:relative}
+.introStick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+#sprk{position:absolute;inset:0;width:100%;height:100%;display:block}
+.introTxt{position:absolute;left:clamp(16px,5vw,64px);top:92px;max-width:560px;pointer-events:none}
+.introTxt h1{font-size:clamp(40px,6vw,84px);line-height:1;margin:10px 0 12px}
+.introTxt h1 em{font-style:normal;color:var(--water)}
+.introTxt p{color:var(--ink2);font-size:clamp(16px,1.6vw,19px);max-width:440px}
+.introHud{position:absolute;left:clamp(16px,5vw,64px);right:clamp(16px,5vw,64px);bottom:22px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--field);pointer-events:none}
+.introHud .bar{flex:1;height:2px;background:rgba(20,53,42,.15);margin:0 16px;position:relative}
+.introHud .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--water)}
+.scrollhint{animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(5px)}}
+@media(max-width:700px){.introTxt{top:84px}}
+/* PLANO */
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;letter-spacing:.04em}
+.gridbg{background-color:#fff;background-image:linear-gradient(rgba(20,53,42,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(20,53,42,.055) 1px,transparent 1px);background-size:24px 24px}
+.plano{border:1.5px solid var(--field);border-radius:6px;background:#fff;position:relative;box-shadow:8px 8px 0 rgba(20,53,42,.08)}
+.plano-head{display:flex;justify-content:space-between;border-bottom:1.5px solid var(--field);padding:8px 14px;font-size:12px;color:var(--field);font-weight:600}
+#plSvg{display:block;width:100%;height:auto}
+#plSvg text{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:var(--field)}
+.plano-ctrl{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px;padding:10px 14px;border-top:1px solid var(--line)}
+.plano-ctrl label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;color:var(--ink2);text-transform:uppercase;letter-spacing:.06em}
+.plano-ctrl label b{color:var(--field);font-family:"IBM Plex Mono";text-transform:none}
+.plano-ctrl input[type=range]{accent-color:var(--field);width:100%}
+.plano-ctrl select{border:1.5px solid var(--line);border-radius:8px;padding:7px 8px;background:#fff;font-size:15px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--ink)}
+.plano-out{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--line)}
+.plano-out div{display:flex;flex-direction:column}
+.plano-out span{font-size:11px;color:var(--muted)}
+.plano-out b{font-family:Archivo,Inter,sans-serif;font-size:24px;color:var(--field);line-height:1.1}
+.plano-out .btn{padding:10px 16px;font-size:15px}
+.plano-out .btn:first-of-type{margin-left:auto}
+.btn.water{background:var(--water);color:#fff}
+.plano .note{font-size:12.5px;color:var(--muted);padding:0 14px 12px}
+#plSvg .wet circle{transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .9s cubic-bezier(.2,.7,.2,1),opacity 1.2s;fill:rgba(43,108,176,.18);stroke:rgba(43,108,176,.45);stroke-width:.6}
+#plSvg .wet circle.on{transform:scale(1)}
+#plSvg .wet.fade circle{opacity:0}
+@media(max-width:600px){.plano-ctrl{grid-template-columns:1fr 1fr}.plano-ctrl label:first-child{grid-column:1/-1}.plano-out .btn:first-of-type{margin-left:0}}
+/* INSTALACIÓN */
+.inst{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;align-items:start;margin-top:24px}
+.inst svg{width:100%;height:auto;display:block;border:1.5px solid var(--field);border-radius:6px;background:#fff}
+.inst svg text{font-family:"IBM Plex Mono",monospace;font-size:13px;fill:var(--field)}
+.inst [data-part]{cursor:pointer}
+.inst [data-part] .ln{stroke:var(--field);stroke-width:2;fill:#fff;transition:stroke .2s,fill .2s}
+.inst [data-part]:hover .ln,.inst [data-part].on .ln{stroke:var(--water);fill:#EAF2FA}
+.inst [data-part] .callout{fill:#fff;stroke:var(--field);stroke-width:1.5}
+.inst [data-part].on .callout{fill:var(--water);stroke:var(--water)}
+.inst [data-part].on .cnum{fill:#fff}
+#instPanel{border:1.5px solid var(--field);border-radius:6px;background:#fff;padding:18px;min-height:300px}
+#instPanel h3{font-size:26px;margin:4px 0 6px}
+#instPanel .row{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+#instPanel .row .ph{width:56px;height:56px;border-radius:8px;background:var(--paper2);display:grid;place-items:center;overflow:hidden}
+#instPanel .row .ph{background:linear-gradient(160deg,#EEF2EF,#E3EAE5)}
+#instPanel .row .ph img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;padding:4px}
+#instPanel .row .ph svg{width:36px;height:36px;opacity:.6}
+#instPanel .row b{font-size:15px;display:block;line-height:1.2}
+#instPanel .row small{color:var(--muted);font-size:13px}
+#instPanel .row .pr{font-family:Archivo,Inter,sans-serif;font-weight:700;color:var(--field);font-size:17px;text-align:right}
+#instPanel .row button{margin-top:4px;font-size:13px;font-weight:700;border:1.5px solid var(--field);color:var(--field);border-radius:8px;padding:4px 10px}
+@media(max-width:900px){.inst{grid-template-columns:1fr}}
+.wflow{stroke:var(--water);stroke-width:2;fill:none;stroke-dasharray:4 6;animation:flow 1.2s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-20}}
+/* COMPARATIVA */
+details.cmp{border-top:1px dashed var(--line);padding-top:8px}
+details.cmp summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--water);list-style:none}
+details.cmp summary::-webkit-details-marker{display:none}
+details.cmp summary::before{content:"＋ "}
+details.cmp[open] summary::before{content:"－ "}
+.cbar{display:grid;grid-template-columns:1fr 64px;gap:6px;align-items:center;font-size:12.5px;margin-top:6px}
+.cbar .t{height:8px;background:var(--paper2);border-radius:4px;overflow:hidden;grid-column:1/-1}
+.cbar .t i{display:block;height:100%;background:#9AA7A0;border-radius:4px}
+.cbar.us .t i{background:var(--field)}
+.cbar.us span{font-weight:700;color:var(--field)}
+.cbar em{font-style:normal;text-align:right;font-family:"IBM Plex Mono";font-size:12px}
+/* BAR */
+.strip{background:var(--field);color:#E7EFEA;overflow:hidden;white-space:nowrap;font-size:15px;padding:13px 0}
+.strip .track{display:inline-flex;gap:48px;animation:slide 60s linear infinite;padding-left:48px}
+.strip span b{color:#F2C46D;font-weight:700}
+@keyframes slide{to{transform:translateX(-50%)}}
+/* CATEGORIES */
+.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.cat{background:var(--paper2);border-radius:18px;overflow:hidden;text-align:left;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+.cat:hover{transform:translateY(-4px);box-shadow:0 18px 30px -20px rgba(20,53,42,.5)}
+.cat .ph{aspect-ratio:1/1;background:#fff;display:grid;place-items:center;overflow:hidden}
+.cat .ph img{width:100%;height:100%;object-fit:contain;padding:12%}
+.cat .ph svg{width:46%;height:46%;opacity:.6}
+.cat .tx{padding:14px 16px}
+.cat .tx b{display:block;font-family:Archivo,Inter,sans-serif;font-size:19px}
+.cat .tx small{color:var(--muted);font-size:14px}
+@media(max-width:900px){.cats{grid-template-columns:repeat(2,1fr)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px;position:relative;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.card:hover{transform:translateY(-4px);box-shadow:0 22px 40px -22px rgba(31,59,45,.45)}
+.card .art{aspect-ratio:4/3;border-radius:12px;background:var(--paper2);display:grid;place-items:center;overflow:hidden;position:relative}
+.card .art{background:linear-gradient(160deg,#EEF2EF 0%,#E3EAE5 100%)}
+.card .art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:7%;mix-blend-mode:multiply;transition:opacity .35s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.card .art img.alt{opacity:0}
+.card:hover .art img.alt{opacity:1}
+.card:hover .art img.main.has-alt{opacity:0}
+.card:hover .art img.main:not(.has-alt){transform:scale(1.07)}
+.card .art .angle{position:absolute;left:10px;bottom:8px;font:600 11px 'IBM Plex Mono',monospace;color:var(--field);opacity:.7}
+.card .art .prov{position:absolute;right:10px;top:8px;font:600 10.5px 'IBM Plex Mono',monospace;color:var(--field);background:rgba(255,255,255,.7);padding:2px 7px;border-radius:5px}
+.card .art svg{width:84px;height:84px;opacity:.6}
+.card .brandtag{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.card h3{font-size:21px;line-height:1.15}
+.card .desc{font-size:15px;color:var(--ink2)}
+.price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:auto}
+.price .now{font-family:Archivo,Inter,sans-serif;font-size:30px;font-weight:700;color:var(--field)}
+.price .was{font-size:14px;color:var(--muted)}
+.price .was s{opacity:.8}
+.save{display:inline-block;background:#E4EFE6;color:var(--ok);font-weight:700;font-size:13px;padding:3px 10px;border-radius:999px}
+.card .add{margin-top:6px;background:var(--field);color:#fff;border-radius:12px;padding:12px;font-weight:600;font-size:16px}
+.card .add:hover{background:var(--field2)}
+.card .pend{font-size:14px;color:var(--warn);font-weight:600}
+
+/* CATALOG */
+section.block{padding:clamp(60px,9vw,110px) clamp(16px,5vw,64px)}
+.block h2.big{font-size:clamp(38px,6vw,76px);line-height:1;margin-bottom:18px;max-width:18ch}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0}
+.chip{border:1.5px solid var(--line);padding:8px 16px;border-radius:999px;font-weight:600;font-size:15px;background:var(--paper2)}
+.chip.on{background:var(--field);border-color:var(--field);color:#fff}
+.search{flex:1;min-width:220px;border:1.5px solid var(--line);border-radius:999px;padding:9px 18px;background:var(--card)}
+
+/* BAND */
+.band{margin:0 clamp(16px,5vw,64px);border:1.5px solid var(--field);border-radius:6px;background-color:#fff;background-image:linear-gradient(rgba(20,53,42,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(20,53,42,.055) 1px,transparent 1px);background-size:24px 24px;color:var(--ink);padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;position:relative;box-shadow:8px 8px 0 rgba(20,53,42,.08)}
+.band h2{font-size:clamp(32px,4.5vw,56px);line-height:1.04}
+.band p{color:var(--ink2);margin:14px 0 24px}
+.band .btn{background:var(--water);color:#fff}
+.band .eyebrow{font-family:"IBM Plex Mono",monospace;color:var(--field)!important}
+.band .faults{display:grid;gap:10px}
+.band .faults button{text-align:left;background:#fff;border:1.5px solid var(--field);padding:13px 16px;border-radius:6px;font-weight:600;color:var(--field);display:flex;justify-content:space-between;align-items:center;transition:background .2s,color .2s}
+.band .faults button:hover{background:var(--field);color:#fff}
+@media(max-width:820px){.band{grid-template-columns:1fr}}
+footer{padding:60px clamp(16px,5vw,64px) 120px;color:var(--ink2);font-size:15px;display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between}
+
+/* DRAWER */
+.scrim{position:fixed;inset:0;background:rgba(20,30,24,.35);z-index:60;opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--paper);z-index:61;transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;box-shadow:-20px 0 60px -30px rgba(0,0,0,.4)}
+.drawer.on{transform:none}
+.drawer header{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid var(--line)}
+.drawer .body{flex:1;overflow:auto;padding:16px 22px}
+.drawer footer{padding:18px 22px;border-top:1px solid var(--line);display:block}
+.line{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.line .n{flex:1;font-weight:600;font-size:16px}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);font-weight:700}
+
+/* BOT */
+.botfab{position:fixed;right:20px;bottom:20px;z-index:50;display:flex;align-items:center;gap:10px;background:var(--water);color:#fff;padding:14px 20px;border-radius:999px;font-weight:700;box-shadow:0 16px 30px -12px rgba(43,108,176,.6)}
+.botfab .dot{width:10px;height:10px;border-radius:50%;background:#9FF0B8;box-shadow:0 0 0 0 rgba(159,240,184,.7);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(159,240,184,0)}100%{box-shadow:0 0 0 0 rgba(159,240,184,0)}}
+.bot{position:fixed;right:20px;bottom:20px;z-index:62;width:min(420px,calc(100% - 24px));height:min(640px,calc(100svh - 40px));background:var(--paper);border-radius:24px;box-shadow:0 30px 80px -20px rgba(0,0,0,.4);display:flex;flex-direction:column;overflow:hidden;transform:scale(.9) translateY(20px);opacity:0;pointer-events:none;transition:.3s;transform-origin:bottom right}
+.bot.on{transform:none;opacity:1;pointer-events:auto}
+.bot header{background:var(--water);color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px}
+.bot header .t{flex:1}
+.bot header small{display:block;opacity:.85;font-size:13px}
+.msgs{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:88%;padding:11px 14px;border-radius:16px;font-size:16px;white-space:pre-wrap}
+.msg.b{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg.u{background:var(--field);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.quick{display:flex;gap:6px;flex-wrap:wrap;padding:0 16px 10px}
+.quick button{font-size:14px;border:1.5px solid var(--water);color:var(--water);padding:6px 12px;border-radius:999px;font-weight:600;background:#fff}
+.bot form{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.bot form input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:999px;padding:11px 16px;background:#fff}
+.bot form button{flex-shrink:0;background:var(--water);color:#fff;border-radius:999px;padding:0 18px;font-weight:700}
+
+/* PANEL */
+#panel{padding:100px clamp(14px,4vw,48px) 80px;min-height:100vh}
+.ptitle{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.ptitle h1{font-size:clamp(36px,5vw,58px);line-height:1}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:26px;border-bottom:1px solid var(--line)}
+.tabs button{padding:12px 18px;font-weight:700;font-size:16px;border-bottom:3px solid transparent;color:var(--ink2)}
+.tabs button.on{border-color:var(--field);color:var(--field)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.kpi .k{font-size:14px;color:var(--ink2);font-weight:600}
+.kpi .v{font-family:Archivo,Inter,sans-serif;font-size:34px;font-weight:700;margin-top:4px}
+.kpi .s{font-size:14px;color:var(--muted)}
+.up{color:var(--ok)}.down{color:var(--bad)}
+.panelcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:18px}
+.panelcard h3{font-size:22px;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.tw{overflow:auto}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:700}
+.pill.ok{background:#E4EFE6;color:var(--ok)}.pill.warn{background:#F7EBD6;color:var(--warn)}.pill.bad{background:#F6E1DE;color:var(--bad)}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end}
+.form label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:700;color:var(--ink2)}
+.form input,.form select,.form textarea{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;font-size:16px}
+.sbtn{background:var(--field);color:#fff;border-radius:10px;padding:11px 16px;font-weight:700}
+.sbtn.alt{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.mini{font-size:13px;padding:5px 10px;border-radius:8px;border:1.5px solid var(--line);font-weight:700;background:#fff}
+.notice{background:#F7EBD6;border:1px solid #E8D3AE;color:#6B4A12;padding:14px 18px;border-radius:14px;margin-bottom:18px;font-size:16px}
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.col{background:var(--paper2);border-radius:var(--r);padding:12px;min-height:200px}
+.col h4{font-size:15px;text-transform:uppercase;letter-spacing:.08em;margin:4px 6px 10px;color:var(--ink2)}
+.av{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;font-size:15px}
+.av b{display:block;font-size:16px}
+.av .meta{color:var(--muted);font-size:13px;margin:4px 0}
+.av .acts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+@media(max-width:860px){.kanban{grid-template-columns:1fr}}
+.chart{width:100%;height:auto}
+.chart text{font:12px Figtree;fill:var(--ink2)}
+.legend{display:flex;gap:18px;font-size:14px;margin-bottom:8px;color:var(--ink2)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;font-size:13px;padding:8px 10px;border-radius:8px;z-index:90;opacity:0;transition:opacity .15s}
+.bars{display:grid;gap:8px}
+.bars .r{display:grid;grid-template-columns:160px 1fr 40px;gap:10px;align-items:center;font-size:15px}
+.bars .t{height:12px;background:var(--paper2);border-radius:6px;overflow:hidden}
+.bars .t i{display:block;height:100%;background:var(--water);border-radius:6px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(30px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;z-index:95;opacity:0;transition:.3s}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+/* ===== Empresa / subsuelo / contacto ===== */
+.sub{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(24px,4vw,56px);align-items:start}
+.subTxt{position:sticky;top:96px}
+.subTxt p{color:var(--ink2);max-width:52ch}
+.svcs{list-style:none;margin-top:22px;border-top:1.5px solid var(--field)}
+.svcs li{display:grid;grid-template-columns:44px 1fr;gap:8px;padding:12px 0;border-bottom:1px solid rgba(20,53,42,.15);cursor:default;transition:background .2s}
+.svcs li:hover,.svcs li.on{background:rgba(43,108,176,.06)}
+.svcs li span{font-family:"IBM Plex Mono",monospace;color:var(--water);font-size:14px;padding-top:3px}
+.svcs li b{display:block;font-size:17px}
+.svcs li small{color:var(--ink2);font-size:14.5px}
+.drill{position:relative;border:1.5px solid var(--field);border-radius:6px;background:#fff;overflow:hidden;box-shadow:8px 8px 0 rgba(20,53,42,.08)}
+.drill .hd{display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(20,53,42,.15);font-size:12.5px;color:var(--ink2)}
+.drill svg{display:block;width:100%;height:auto}
+.drill .ft{padding:10px 14px;font-size:12.5px;color:var(--muted);border-top:1px solid rgba(20,53,42,.15)}
+.segs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.seg{border:1.5px solid var(--field);border-radius:6px;padding:22px;background:#fff;display:flex;flex-direction:column;gap:10px;transition:transform .2s,box-shadow .2s}
+.seg:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--field)}
+.seg h3{font-size:24px}
+.seg p{color:var(--ink2);font-size:16px}
+.seg .start{margin-top:auto;font-size:14px;color:var(--field2);border-top:1px dashed rgba(20,53,42,.3);padding-top:10px}
+.seg .tags{display:flex;gap:6px;flex-wrap:wrap}
+.seg .tags i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:12px;border:1px solid var(--water);color:var(--water);border-radius:4px;padding:2px 6px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:26px;border:1.5px solid var(--field);border-radius:6px;overflow:hidden;background:#fff}
+.step{padding:22px;border-right:1px solid rgba(20,53,42,.15);position:relative}
+.step:last-child{border-right:0}
+.step .n{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--water)}
+.step h3{font-size:22px;margin:6px 0}
+.step p{color:var(--ink2);font-size:15.5px}
+.step::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--water);transition:width 1s ease}
+.steps.in .step::after{width:100%}
+.steps.in .step:nth-child(2)::after{transition-delay:.4s}.steps.in .step:nth-child(3)::after{transition-delay:.8s}.steps.in .step:nth-child(4)::after{transition-delay:1.2s}
+.one{margin-top:14px;font-size:15px;color:var(--ink2)}
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(20px,4vw,48px);align-items:start}
+.cdata{display:grid;gap:14px}
+.cdata a{color:var(--ink);text-decoration:none}
+.cdata .big2{font-family:Archivo,Inter,sans-serif;font-weight:700;font-size:clamp(28px,4vw,44px);letter-spacing:-.02em}
+.hours{width:100%;border-collapse:collapse;font-size:15.5px}
+.hours td{padding:7px 0;border-bottom:1px solid rgba(20,53,42,.12)}
+.hours td:last-child{text-align:right;font-family:"IBM Plex Mono",monospace}
+.hours tr.today td{color:var(--water);font-weight:700}
+.openNow{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+.openNow i{width:9px;height:9px;border-radius:50%;background:#9aa}
+.openNow.on i{background:#2f9e5b;box-shadow:0 0 0 4px rgba(47,158,91,.18)}
+.cform{border:1.5px solid var(--field);border-radius:6px;padding:22px;background:#fff;display:grid;gap:12px;box-shadow:8px 8px 0 rgba(20,53,42,.08)}
+.cform label{display:grid;gap:5px;font-size:14px;font-weight:600;color:var(--ink2)}
+.cform input,.cform select,.cform textarea{font:inherit;font-size:16px;padding:11px 12px;border:1.5px solid rgba(20,53,42,.25);border-radius:8px;background:#fff;color:var(--ink)}
+.cform input:focus,.cform select:focus,.cform textarea:focus{outline:none;border-color:var(--water)}
+.cform .needs{display:flex;flex-wrap:wrap;gap:8px}
+.cform .needs button{border:1.5px solid var(--field);border-radius:999px;padding:7px 13px;font-size:14px;font-weight:600;color:var(--field);background:#fff}
+.cform .needs button.on{background:var(--field);color:#fff}
+.cform small{color:var(--muted);font-size:13px}
+@media(max-width:900px){.sub,.contact{grid-template-columns:1fr}.subTxt{position:static}.segs{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid rgba(20,53,42,.15)}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid rgba(20,53,42,.15)}}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav class="top" id="nav">
+  <a class="brand" href="#tienda">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c5 7 9 11.5 9 16.5A9 9 0 0 1 7 19.5C7 14.5 11 10 16 3z" fill="#2B6CB0"/><path d="M11 21c1.5 2.5 4 3.5 6.5 3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    <span>DRESAPLAST<small>Riego para fincas · León</small></span>
+  </a>
+  <div class="links">
+    <a class="opt" href="#recorrido" data-shop>Secciones</a>
+    <a class="opt" href="#catalogo" data-shop>Catálogo</a>
+    <a class="opt" href="#averias" data-shop>Averías</a>
+    <a class="opt" href="#empresa" data-shop>Empresa</a>
+    <a class="opt" href="#contacto" data-shop>Contacto</a>
+    <a href="#panel" id="panelLink">Gestión</a>
+    <button class="cartbtn" id="openCart">Pedido <b id="cartCount">0</b></button>
+  </div>
+</nav>
+
+<!-- ============ TIENDA ============ -->
+<main id="tienda">
+  <section id="intro" class="gridbg" aria-label="Aspersor girando">
+    <div class="introStick">
+      <canvas id="sprk" aria-hidden="true"></canvas>
+      <div class="introTxt">
+        <div class="eyebrow mono">DRESAPLAST · RIEGO PARA FINCAS · LEÓN</div>
+        <h1 id="introH">Baja y verás<br>cómo <em>riega.</em></h1>
+        <p id="introP">Cada vuelta del aspersor es agua bien repartida. Nosotros ponemos el material para que llegue a toda la finca.</p>
+      </div>
+      <div class="introHud mono"><span class="scrollhint" id="hudL">▼ BAJA</span><span class="bar"><i id="hudBar"></i></span><span id="hudR">GIRO 0°</span></div>
+    </div>
+  </section>
+
+  <header class="hero gridbg">
+    <div>
+      <div class="eyebrow">Material de riego · Zuares del Páramo, León</div>
+      <h1>Todo para regar tu finca, <em>al mejor precio.</em></h1>
+      <p>Programadores, válvulas, filtros, tubería y aspersores de VYRSA, RIS Iberia, ITM Filters, Hidroten y Almagromur. Más de 20 años haciendo riego en León, del pozo al último aspersor.</p>
+      <div class="cta">
+        <a class="btn dark" href="#catalogo">Ver el catálogo</a>
+        <button class="btn ghost" data-openbot>Tengo una avería</button>
+      </div>
+      <div class="trust"><span><i></i>Más de 20 años en León</span><span><i></i>Asistencia técnica 24 h</span><span><i></i>Precio revisado cada día</span></div>
+    </div>
+    <div class="plano" id="plano">
+      <div class="plano-head"><span class="mono">PLANO 01 · CALCULA TU FINCA</span><span class="mono" id="plDim"></span></div>
+      <svg id="plSvg" viewBox="0 0 600 380" role="img" aria-label="Plano de finca con calles y aspersores"></svg>
+      <div class="plano-ctrl">
+        <label>Superficie <b id="haV">8 ha</b><input type="range" id="ha" min="1" max="40" value="8"></label>
+        <label>Forma<select id="forma"><option value="1">Cuadrada</option><option value="2" selected>Alargada</option><option value="3.5">Muy alargada</option></select></label>
+        <label>Marco<select id="marco"><option value="12x12">12 × 12 m</option><option value="12x15">12 × 15 m</option><option value="15x15">15 × 15 m</option><option value="18x18" selected>18 × 18 m</option></select></label>
+      </div>
+      <div class="plano-out">
+        <div><span class="mono">ASPERSORES</span><b id="outA">—</b></div>
+        <div><span class="mono">CALLES</span><b id="outC">—</b></div>
+        <div><span class="mono">RAMALES</span><b id="outR">—</b></div>
+        <button class="btn water" id="regar">▶ Regar</button>
+        <button class="btn dark" id="pedirFinca">Pedir presupuesto</button>
+      </div>
+      <p class="note">Estimación geométrica orientativa: calles en paralelo desde la línea base. Diámetros y pérdidas de carga los calcula el ingeniero de DRESAPLAST.</p>
+    </div>
+  </header>
+
+  
+  <section class="block" id="recorrido">
+    <div class="eyebrow mono">PLANO 02 · LA INSTALACIÓN</div>
+    <h2 class="big">Toca cada parte de la instalación.</h2>
+    <p style="color:var(--ink2);max-width:60ch">Del pozo al último aspersor. Pulsa una pieza del esquema para ver el material que tenemos y su precio.</p>
+    <div class="inst"><svg id="instSvg" viewBox="0 0 1000 400" role="img" aria-label="Esquema de una instalación de riego"></svg><aside id="instPanel"></aside></div>
+  </section>
+
+
+  <section class="block" id="empresa">
+    <div class="sub">
+      <div class="subTxt">
+        <div class="eyebrow mono">PLANO 04 · BAJAMOS A POR EL AGUA</div>
+        <h2 class="big">No empezamos por el aspersor.</h2>
+        <p>Primero miramos de dónde sale el agua, cuánta hay y cuánta necesita la finca. Localizamos el acuífero, perforamos el pozo, calculamos la bomba y llevamos el caudal hasta el último aspersor. Todo el recorrido lo hacemos nosotros, también el tramo difícil.</p>
+        <ul class="svcs" id="svcs">
+          <li data-l="0"><span>01</span><div><b>Sondeos e hidrogeología</b><small>Prospección, perforación, aforo y ensayo de bombeo.</small></div></li>
+          <li data-l="1"><span>02</span><div><b>Pozos</b><small>Construcción, entubado, equipamiento y rehabilitación de pozos que pierden caudal.</small></div></li>
+          <li data-l="2"><span>03</span><div><b>Bombeo, tuberías y canalizaciones</b><small>Bombas, grupos de presión, tubería y valvulería.</small></div></li>
+          <li data-l="3"><span>04</span><div><b>Riego automatizado</b><small>Jardín y finca particular, riego agrícola eficiente y cobertura enterrada.</small></div></li>
+          <li data-l="3"><span>05</span><div><b>Redes de abastecimiento</b><small>Redes municipales de agua potable, renovación de tramos y acometidas.</small></div></li>
+          <li data-l="3"><span>06</span><div><b>Telegestión</b><small>Control remoto, programación y avisos de incidencia.</small></div></li>
+          <li data-l="3"><span>07</span><div><b>Reparaciones y repuestos</b><small>Reparación de bombas e instalaciones, almacén propio y asistencia 24 h.</small></div></li>
+        </ul>
+      </div>
+      <div class="drill" id="drill">
+        <div class="hd mono"><span>CORTE DEL SUBSUELO · BAJA PARA PERFORAR</span><span id="drillLbl">SUPERFICIE</span></div>
+        <svg id="drillSvg" viewBox="0 0 520 760" aria-label="Corte ilustrativo del subsuelo con un sondeo"></svg>
+        <div class="ft">Esquema ilustrativo. La profundidad y el caudal reales salen del estudio de cada parcela.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="paraquien">
+    <div class="eyebrow mono">PARA QUIÉN TRABAJAMOS</div>
+    <h2 class="big">Tres tipos de cliente, un mismo oficio.</h2>
+    <div class="segs">
+      <article class="seg"><div class="eyebrow mono">PARTICULARES</div><h3>Agua propia en casa</h3><p>Pozo propio, grupo de presión y riego de jardín programado.</p><div class="tags"><i>01</i><i>02</i><i>03</i><i>04</i><i>07</i></div><div class="start">Suelen empezar por un sondeo en la parcela.</div><button class="btn ghost" data-need="Pozo o sondeo">Consultar</button></article>
+      <article class="seg"><div class="eyebrow mono">AGRICULTURA</div><h3>Riego que rinde</h3><p>Cobertura total enterrada, automatismos, bombeo y revisiones en campaña.</p><div class="tags"><i>02</i><i>03</i><i>04</i><i>06</i><i>07</i></div><div class="start">Suelen empezar por el diseño del riego sobre plano.</div><button class="btn ghost" data-need="Riego agrícola">Consultar</button></article>
+      <article class="seg"><div class="eyebrow mono">ADMINISTRACIÓN</div><h3>Redes que no fallan</h3><p>Redes de agua potable para ayuntamientos y núcleos rurales, con telegestión y asistencia 24 h.</p><div class="tags"><i>03</i><i>05</i><i>06</i><i>07</i></div><div class="start">Suelen empezar por un tramo de red que ya falla.</div><button class="btn ghost" data-need="Red municipal o telegestión">Consultar</button></article>
+    </div>
+  </section>
+
+  <section class="block" id="comotrabajamos">
+    <div class="eyebrow mono">CÓMO TRABAJAMOS</div>
+    <h2 class="big">Cuatro pasos y un solo responsable.</h2>
+    <div class="steps" id="steps">
+      <div class="step"><div class="n">01</div><h3>Analizamos</h3><p>Subsuelo, profundidad y caudal disponible.</p></div>
+      <div class="step"><div class="n">02</div><h3>Asesoramos</h3><p>Caudal, presión, consumo y lo que costará mantenerlo.</p></div>
+      <div class="step"><div class="n">03</div><h3>Diseñamos</h3><p>Trazado, diámetros, bombeo, automatismos y telegestión. Proyecto completo antes de la obra.</p></div>
+      <div class="step"><div class="n">04</div><h3>Ejecutamos</h3><p>Perforación, instalación, puesta en marcha, mantenimiento y repuestos propios.</p></div>
+    </div>
+    <p class="one">Desde el primer estudio hasta el último repuesto, hablas siempre con la misma empresa.</p>
+  </section>
+
+  <section class="block" id="catalogo">
+    <div class="eyebrow">Catálogo completo</div>
+    <h2 class="big">Todo lo que una finca necesita para regar bien.</h2>
+    <div class="chips" id="chips"></div>
+    <div class="cards" id="grid"></div>
+  </section>
+
+  <section id="averias" style="padding-bottom:60px">
+    <div class="band">
+      <div>
+        <div class="eyebrow">PLANO 03 · ASISTENTE DE AVERÍAS</div>
+        <h2>¿Algo no riega como debería?</h2>
+        <p>La mayoría de las averías de una finca se arreglan en minutos si sabes dónde mirar. Cuéntaselo al asistente y te guía paso a paso. Si no se resuelve, lo pasamos a un técnico.</p>
+        <button class="btn" data-openbot>Hablar con el asistente</button>
+      </div>
+      <div class="faults" id="faultBtns"></div>
+    </div>
+  </section>
+
+
+  <section class="block" id="contacto">
+    <div class="eyebrow mono">CONTACTO · ZUARES DEL PÁRAMO</div>
+    <h2 class="big">Cuéntanos tu caso.</h2>
+    <div class="contact">
+      <div class="cdata">
+        <a class="big2" href="tel:+34987372022">987 37 20 22</a>
+        <a href="mailto:dresaplast@dresaplast.com" style="font-size:19px">dresaplast@dresaplast.com</a>
+        <div>Nave y almacén en Zuares del Páramo, 24249 León.<br><span style="color:var(--ink2);font-size:15px">Trabajamos sobre todo en la provincia de León y en Castilla y León.</span></div>
+        <div><span class="openNow" id="openNow"><i></i><span>—</span></span></div>
+        <table class="hours" id="hours">
+          <tr data-d="1,2,3,4,5"><td>Lunes a viernes</td><td>8:00 – 19:30</td></tr>
+          <tr data-d="6"><td>Sábado</td><td>9:00 – 14:00</td></tr>
+          <tr data-d="0"><td>Domingo</td><td>Cerrado</td></tr>
+        </table>
+        <div style="font-size:15px;color:var(--ink2)">Fuera de horario hay guardia de <b style="color:var(--ink)">asistencia técnica 24 h</b>.</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn dark" href="tel:+34987372022">Llamar ahora</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=DRESAPLAST+Zuares+del+P%C3%A1ramo+Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa</a></div>
+      </div>
+      <form class="cform" id="cform">
+        <label>Nombre<input name="nombre" required autocomplete="name"></label>
+        <label>Teléfono o correo<input name="contacto" required></label>
+        <div><div style="font-size:14px;font-weight:600;color:var(--ink2);margin-bottom:6px">¿Qué necesitas?</div>
+          <div class="needs" id="needs"><button type="button">Pozo o sondeo</button><button type="button">Riego particular</button><button type="button">Riego agrícola</button><button type="button">Red municipal o telegestión</button><button type="button">Reparación o repuesto</button><button type="button">Otra cosa</button></div></div>
+        <label>Cuéntanos<textarea name="texto" rows="4" placeholder="Superficie, cultivo, si ya tienes pozo, qué falla..."></textarea></label>
+        <button class="btn water" type="submit">Enviar consulta</button>
+        <small>Se abre tu programa de correo con el mensaje preparado. Esta web no guarda tus datos.</small>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div><b class="serif" style="font-size:22px;color:var(--ink)">DRESAPLAST</b><br>Ingeniería del agua y material de riego<br>Zuares del Páramo, 24249 León<br><a href="tel:+34987372022" style="color:inherit">987 37 20 22</a> · <a href="mailto:dresaplast@dresaplast.com" style="color:inherit">dresaplast@dresaplast.com</a></div>
+    <div>Precios con IVA incluido.<br>Comparados a diario con tiendas online de riego.</div>
+    <div id="lastAnalysis">Último análisis de precios: —</div>
+  </footer>
+</main>
+
+<!-- ============ PANEL ============ -->
+<main id="panel" class="hide">
+  <div class="ptitle">
+    <div><div class="eyebrow">Panel interno</div><h1>Gestión DRESAPLAST</h1></div>
+    <a class="btn ghost" href="#tienda">← Volver a la tienda</a>
+  </div>
+  <div id="panelNotice"></div>
+  <div class="tabs" id="tabs">
+    <button data-tab="resumen" class="on">Resumen</button>
+    <button data-tab="facturas">Facturación</button>
+    <button data-tab="precios">Precios y competencia</button>
+    <button data-tab="averias">Averías en fincas</button>
+  </div>
+
+  <section data-pane="resumen">
+    <div class="kpis" id="kpis"></div>
+    <div class="panelcard">
+      <h3>Facturación por mes</h3>
+      <div class="legend" id="chartLegend"></div>
+      <div id="chartWrap"></div>
+    </div>
+    <div class="panelcard">
+      <h3>Histórico por años</h3>
+      <div class="tw"><table id="yearTable"></table></div>
+    </div>
+  </section>
+
+  <section data-pane="facturas" class="hide">
+    <div class="panelcard">
+      <h3>Nueva factura</h3>
+      <form class="form" id="invForm">
+        <label>Nº factura<input name="numero" required></label>
+        <label>Fecha<input name="fecha" type="date" required></label>
+        <label>Cliente<input name="cliente" required></label>
+        <label>Concepto<input name="concepto"></label>
+        <label>Base imponible (€)<input name="base" type="number" step="0.01" required></label>
+        <label>IVA %<select name="iva"><option>21</option><option>10</option><option>4</option><option>0</option></select></label>
+        <label>Coste del material (€)<input name="coste" type="number" step="0.01" value="0"></label>
+        <label>Estado<select name="estado"><option value="pendiente">Pendiente de cobro</option><option value="cobrada">Cobrada</option></select></label>
+        <button class="sbtn" type="submit">Guardar factura</button>
+      </form>
+    </div>
+    <div class="panelcard">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+        <h3 style="margin:0;flex:1">Facturas</h3>
+        <select id="fYear" class="mini"></select>
+        <select id="fState" class="mini"><option value="">Todas</option><option value="pendiente">Pendientes</option><option value="cobrada">Cobradas</option></select>
+        <button class="mini" id="demoBtn">Cargar datos de ejemplo</button>
+        <button class="mini" id="demoDel">Borrar ejemplos</button>
+      </div>
+      <div class="tw"><table id="invTable"></table></div>
+    </div>
+  </section>
+
+  <section data-pane="precios" class="hide">
+    <div class="panelcard">
+      <h3>Regla automática de precios</h3>
+      <p style="color:var(--ink2);margin-bottom:14px;font-size:16px">Cada día se revisan los precios de la competencia. Tu precio = el más barato encontrado menos el descuento. Si con eso bajas del coste + margen mínimo, se queda en el margen mínimo y te avisa.</p>
+      <form class="form" id="cfgForm">
+        <label>Más barato que la competencia (%)<input name="descuento" type="number" min="0" max="50" step="0.5"></label>
+        <label>Margen mínimo sobre coste (%)<input name="margenMin" type="number" min="0" max="200" step="1"></label>
+        <button class="sbtn" type="submit">Guardar regla</button>
+      </form>
+      <p id="analysisInfo" style="margin-top:14px;font-size:15px;color:var(--muted)"></p>
+    </div>
+    <div class="panelcard">
+      <h3>Precios por pieza</h3>
+      <div class="tw"><table id="priceTable"></table></div>
+    </div>
+    <div class="panelcard">
+      <h3>Lo que más se vende en la competencia</h3>
+      <div id="topSellers" style="font-size:16px;color:var(--ink2)">Aparecerá tras el primer análisis diario.</div>
+    </div>
+  </section>
+
+  <section data-pane="averias" class="hide">
+    <div class="panelcard">
+      <h3>Nuevo parte de avería</h3>
+      <form class="form" id="avForm">
+        <label>Finca<input name="finca" required></label>
+        <label>Cliente<input name="cliente" required></label>
+        <label>Municipio<input name="municipio"></label>
+        <label>Tipo<select name="tipo">
+          <option>Electroválvula no abre/cierra</option><option>Programador</option><option>Aspersor no gira</option>
+          <option>Goteros obstruidos</option><option>Baja presión</option><option>Fuga en tubería</option><option>Filtro colmatado</option><option>Bomba / grupo de presión</option><option>Otro</option>
+        </select></label>
+        <label>Prioridad<select name="prioridad"><option>Normal</option><option>Urgente</option><option>Baja</option></select></label>
+        <label>Técnico<input name="tecnico"></label>
+        <label style="grid-column:1/-1">Descripción<textarea name="desc" rows="2"></textarea></label>
+        <button class="sbtn" type="submit">Abrir parte</button>
+      </form>
+    </div>
+    <div class="kanban" id="kanban"></div>
+    <div class="panelcard" style="margin-top:18px">
+      <h3>Averías recurrentes</h3>
+      <p style="font-size:15px;color:var(--muted);margin-bottom:12px">Las más repetidas son las que el asistente debe resolver antes de que llegue la llamada.</p>
+      <div class="bars" id="avStats"></div>
+    </div>
+  </section>
+</main>
+
+<!-- cart -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Pedido">
+  <header><h3 class="serif" style="font-size:26px">Tu pedido</h3><button id="closeCart" aria-label="Cerrar" style="font-size:28px">×</button></header>
+  <div class="body" id="cartBody"></div>
+  <footer>
+    <div style="display:flex;justify-content:space-between;font-size:20px;font-weight:700;margin-bottom:6px"><span>Total</span><span id="cartTotal">0,00 €</span></div>
+    <div id="cartSave" style="color:var(--ok);font-weight:600;font-size:15px;margin-bottom:14px"></div>
+    <button class="btn dark" style="width:100%;justify-content:center" id="copyOrder">Copiar pedido para enviarlo</button>
+    <p style="font-size:13px;color:var(--muted);margin-top:10px">Se copia el pedido con referencias y precios para mandarlo por WhatsApp o email a DRESAPLAST.</p>
+  </footer>
+</aside>
+
+<!-- bot -->
+<button class="botfab" id="botfab" data-openbot><span class="dot"></span>¿Una avería? Pregunta</button>
+<section class="bot" id="bot" aria-label="Asistente de averías">
+  <header>
+    <svg width="34" height="34" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#fff" opacity=".18"/><path d="M16 7c3.5 5 6 8 6 11.5a6 6 0 0 1-12 0C10 15 12.5 12 16 7z" fill="#fff"/></svg>
+    <div class="t"><b>Asistente de riego</b><small id="botMode">Resuelve averías habituales paso a paso</small></div>
+    <button id="closeBot" aria-label="Cerrar" style="font-size:26px;color:#fff">×</button>
+  </header>
+  <div class="msgs" id="msgs"></div>
+  <div class="quick" id="quick"></div>
+  <form id="botForm"><input id="botIn" placeholder="Describe qué le pasa a tu riego…" autocomplete="off"><button>Enviar</button></form>
+</section>
+
+<div class="tip" id="tip"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= DATOS BASE (solo si no hay base de datos) ================= */
+const CATS = {
+  filtrar:{n:"Filtrar",t:"Primero, agua limpia.",d:"Un filtro bien elegido evita el 70% de las averías aguas abajo: goteros atascados, válvulas que no cierran, aspersores que se paran."},
+  programar:{n:"Programar",t:"El cerebro de la finca.",d:"Riega de madrugada, sin estar. Programadores sencillos para una caseta o modulares para muchas parcelas."},
+  valvulas:{n:"Abrir y cerrar",t:"Cada sector, a su hora.",d:"Electroválvulas robustas que abren cuando lo manda el programador y cierran del todo cuando acaba."},
+  tuberia:{n:"Distribuir",t:"El agua llega a todas partes.",d:"Tubería de goteo y polietileno para llevar el agua hasta la última fila sin perder presión."},
+  aspersion:{n:"Regar",t:"Lluvia justa donde hace falta.",d:"Aspersores de jardín y agrícolas de latón para prados, cereal, alfalfa y huerta."}
+};
+const ORDER = ["filtrar","programar","valvulas","tuberia","aspersion"];
+const FALLBACK = [
+ {id:"azud-modular-2",nombre:"Filtro de anillas Azud Modular 2\" 130 µ",cat:"filtrar",marca:"Azud",desc:"Hasta 25 m³/h, 8 bar. Para cabezal de goteo o aspersión.",coste:null,competidores:[{tienda:"DVS Beregnung",precio:41.25}]},
+ {id:"hunter-xcore-4i",nombre:"Programador Hunter X-Core 4 estaciones interior",cat:"programar",marca:"Hunter",desc:"3 programas, 4 arranques. Admite sensor Solar Sync.",coste:null,competidores:[{tienda:"Pratoerboso",precio:69.88},{tienda:"DVS Beregnung",precio:83.05}]},
+ {id:"rainbird-tm2-6",nombre:"Programador Rain Bird ESP-TM2 6 estaciones exterior",cat:"programar",marca:"Rain Bird",desc:"Preparado para wifi con módulo LNK. Caja de exterior.",coste:null,competidores:[{tienda:"Pratoerboso",precio:179.41},{tienda:"DVS Beregnung",precio:184.00}]},
+ {id:"hunter-proc-4i",nombre:"Programador Hunter Pro-C modular 4 estaciones",cat:"programar",marca:"Hunter",desc:"Ampliable con módulos. El favorito de los instaladores.",coste:null,competidores:[{tienda:"La Tienda del Jardín",precio:223.90},{tienda:"IOT-Pool",precio:319.00}]},
+ {id:"hunter-pgv-100",nombre:"Electroválvula Hunter PGV-100 1\" 24 V",cat:"valvulas",marca:"Hunter",desc:"0,05–9 m³/h. Purga interna y externa, tapa atornillada.",coste:null,competidores:[{tienda:"Piscinas y Productos",precio:17.75},{tienda:"La Tienda del Jardín",precio:19.95},{tienda:"Baeza Online",precio:28.21}]},
+ {id:"goteo-16-100",nombre:"Tubería goteo autocompensante 16 mm · 100 m",cat:"tuberia",marca:"Varios",desc:"Goteros cada 40 cm. Terreno llano o con desnivel.",coste:null,competidores:[{tienda:"Worten (Jardin202)",precio:35.45}]},
+ {id:"rainbird-5004pc",nombre:"Aspersor Rain Bird 5004-PC 3/4\"",cat:"aspersion",marca:"Rain Bird",desc:"Alcance 7,6–15,2 m. Incluye juego de boquillas.",coste:null,competidores:[{tienda:"La Tienda del Jardín",precio:11.50},{tienda:"IOT-Pool",precio:14.99},{tienda:"ManoMano",precio:26.57}]},
+ {id:"hunter-pgp-04",nombre:"Aspersor Hunter PGP Ultra 10 cm",cat:"aspersion",marca:"Hunter",desc:"Ajustable de 50° a 360°, entrada 3/4\".",coste:null,competidores:[]},
+ {id:"vyr-35",nombre:"Aspersor agrícola VYR-35 latón 3/4\"",cat:"aspersion",marca:"VYRSA",desc:"Círculo completo, una o dos boquillas. Cereal, alfalfa, prados.",coste:null,competidores:[]}
+];
+
+/* ================= ESTADO ================= */
+const S = { productos: FALLBACK.slice(), cfg:{descuento:5,margenMin:15}, analisis:null, facturas:[], averias:[], finca:null, db:null, canEdit:false, canUpload:false, assets:null, heroFotoId:null, sample:null, chat:[] };
+const $ = s=>document.querySelector(s), $$ = s=>[...document.querySelectorAll(s)];
+const eur = n => (n==null||isNaN(n))?"—":n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
+const eur0 = n => n.toLocaleString("es-ES",{maximumFractionDigits:0})+" €";
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),2600)}
+
+/* ================= PRECIO AUTOMÁTICO ================= */
+function pricing(p){
+  const comps=(p.competidores||[]).filter(c=>c.precio>0);
+  if(!comps.length) return {precio:null};
+  const min=Math.min(...comps.map(c=>c.precio));
+  const best=comps.find(c=>c.precio===min);
+  let precio=min*(1-(+S.cfg.descuento||0)/100);
+  let suelo=null, protegido=false;
+  if(p.coste>0){ suelo=p.coste*(1+(+S.cfg.margenMin||0)/100); if(precio<suelo){precio=suelo;protegido=true} }
+  precio=Math.floor(precio*100)/100;
+  return {precio,min,best,suelo,protegido,ahorro:Math.max(0,min-precio)};
+}
+
+/* ================= ICONOS ================= */
+function icon(cat){
+  const s='stroke="#1F3B2D" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"';
+  const w='fill="#2B6CB0"';
+  return {
+    filtrar:`<svg viewBox="0 0 96 96"><rect x="30" y="18" width="36" height="62" rx="10" ${s}/><path d="M30 34h36M30 64h36M14 30h16M66 30h16" ${s}/>${[40,46,52,58].map(y=>`<path d="M38 ${y}h20" stroke="#2B6CB0" stroke-width="2.2"/>`).join("")}</svg>`,
+    programar:`<svg viewBox="0 0 96 96"><rect x="16" y="16" width="64" height="64" rx="12" ${s}/><rect x="26" y="26" width="44" height="18" rx="4" ${w} opacity=".85"/><circle cx="48" cy="62" r="9" ${s}/><path d="M48 62l5-4" ${s}/><circle cx="28" cy="70" r="2.5" fill="#C98A2E"/></svg>`,
+    valvulas:`<svg viewBox="0 0 96 96"><path d="M10 60h22M64 60h22" ${s}/><path d="M32 48h32v24H32z" ${s}/><rect x="40" y="22" width="16" height="26" rx="4" ${s}/><path d="M48 14v8" ${s}/><circle cx="48" cy="60" r="5" ${w}/></svg>`,
+    tuberia:`<svg viewBox="0 0 96 96"><ellipse cx="48" cy="48" rx="32" ry="32" ${s}/><ellipse cx="48" cy="48" rx="22" ry="22" ${s}/><ellipse cx="48" cy="48" rx="12" ry="12" ${s}/>${[[48,16],[80,48],[48,80],[16,48],[70,26]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" ${w}/>`).join("")}</svg>`,
+    aspersion:`<svg viewBox="0 0 96 96"><path d="M48 84V50M40 84h16" ${s}/><rect x="42" y="40" width="12" height="12" rx="3" ${s}/><path d="M50 42l14-12" ${s}/>${[[66,22],[74,30],[78,18],[60,14],[84,24]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.6" ${w}/>`).join("")}</svg>`
+  }[cat]||"";
+}
+
+/* ================= TARJETAS ================= */
+function cardHTML(p){
+  const pr=pricing(p);
+  const priceBlock = pr.precio==null
+    ? `<div class="pend">Precio en revisión · consúltanos</div>`
+    : `<div class="price"><span class="now">${eur(pr.precio)}</span>${pr.ahorro>0.004?`<span class="was">Competencia <s>${eur(pr.min)}</s></span><span class="save">Ahorras ${eur(pr.ahorro)}</span>`:""}</div>`;
+  return `<article class="card reveal">
+    <div class="art">${artHTML(p)}${S.canUpload?`<button class="photoedit" data-photo="${esc(p.id)}">${p.fotoId?"Cambiar foto":"Añadir foto"}</button>`:""}</div>
+    <div class="brandtag">${esc(p.marca)}</div>
+    <h3>${esc(p.nombre)}</h3>
+    <div class="desc">${esc(p.desc)}</div>
+    ${priceBlock}
+    <button class="add" data-add="${esc(p.id)}">${pr.precio==null?"Pedir presupuesto":"Añadir al pedido"}</button>
+    ${cmpHTML(p,pr)}
+  </article>`;
+}
+
+function renderShop(){
+  renderGrid();
+  renderInst();
+  const f = S.analisis?.fecha ? new Date(S.analisis.fecha).toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"}) : "6 de noviembre de 2026 (carga inicial)";
+  $("#lastAnalysis").textContent="Último análisis de precios: "+f;
+  observeReveals();
+}
+let gridCat="todo", gridQ="", gridLimit=24;
+function renderGrid(){
+  $("#chips").innerHTML=[["todo","Todo"],...ORDER.map(c=>[c,CATS[c].n])].map(([k,n])=>`<button class="chip ${k===gridCat?"on":""}" data-chip="${k}">${n} <small style="opacity:.6">${k==="todo"?S.productos.length:S.productos.filter(p=>p.cat===k).length}</small></button>`).join("")+`<input class="search" id="q" placeholder="Busca por marca o pieza…" value="${esc(gridQ)}">`;
+  const list=S.productos.filter(p=>(gridCat==="todo"||p.cat===gridCat)&&(p.nombre+" "+p.marca).toLowerCase().includes(gridQ.toLowerCase()));
+  $("#grid").innerHTML=(list.slice(0,gridLimit).map(cardHTML).join("")||`<p>No hay piezas con ese nombre. Pregunta al asistente.</p>`)+(list.length>gridLimit?`<div style="grid-column:1/-1;text-align:center"><button class="btn ghost" data-more>Ver más piezas (${list.length-gridLimit})</button></div>`:"");
+  observeReveals();
+}
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-gocat]"); if(g){gridCat=g.dataset.gocat;gridLimit=24;renderGrid();$("#catalogo").scrollIntoView({behavior:"smooth"});}
+  const c=e.target.closest("[data-chip]"); if(c){gridCat=c.dataset.chip;gridLimit=24;renderGrid();}
+  if(e.target.closest("[data-more]")){gridLimit+=24;renderGrid();}
+  const a=e.target.closest("[data-add]"); if(a){addToCart(a.dataset.add);}
+});
+document.addEventListener("input",e=>{ if(e.target.id==="q"){gridQ=e.target.value;gridLimit=24;const pos=e.target.selectionStart;renderGrid();const q=$("#q");q.focus();q.setSelectionRange(pos,pos);} });
+
+
+/* ================= FOTOS DE PRODUCTO ================= */
+function imgSrc(id){id=String(id||"");return esc(/\.(jpe?g|png|webp)$/i.test(id)?id:"/_blob/"+id);}
+function fotos(p){const f=(p.fotos||[]).filter(Boolean);if(!f.length&&p.fotoId)f.push(p.fotoId);return f;}
+function artHTML(p){const f=fotos(p);if(!f.length)return icon(p.cat);
+  return `<img class="main${f[1]?" has-alt":""}" src="${imgSrc(f[0])}" alt="${esc(p.nombre)}" loading="lazy">${f[1]?`<img class="alt" src="${imgSrc(f[1])}" alt="" loading="lazy"><span class="angle">↻ 2 vistas</span>`:""}${p.proveedor?`<span class="prov">${esc(p.proveedor).toUpperCase()}</span>`:""}`;}
+
+/* ================= COMPARATIVA ================= */
+function cmpHTML(p,pr){
+  const comps=(p.competidores||[]).filter(c=>c.precio>0).slice().sort((a,b)=>a.precio-b.precio);
+  if(!comps.length||pr.precio==null) return "";
+  const mx=Math.max(...comps.map(c=>c.precio),pr.precio);
+  const row=(n,v,us)=>`<div class="cbar${us?" us":""}"><span>${esc(n)}</span><em>${eur(v)}</em><div class="t"><i style="width:${(v/mx*100).toFixed(1)}%"></i></div></div>`;
+  return `<details class="cmp"><summary>Comparar con ${comps.length} ${comps.length===1?"tienda":"tiendas"}</summary>${row("DRESAPLAST",pr.precio,true)}${comps.map(c=>row(c.tienda.replace(/ ·.*$/,""),c.precio)).join("")}</details>`;
+}
+
+
+/* ================= INTRO: ASPERSOR DE IMPACTO REAL ================= */
+(function(){
+  const sec=$("#intro"), cv=$("#sprk"); if(!sec||!cv) return;
+  const ctx=cv.getContext("2d");
+  const bg=document.createElement("canvas"), bgx=bg.getContext("2d");      // cielo + campo (estático)
+  const wet=document.createElement("canvas"), wx=wet.getContext("2d");     // suelo mojado (se acumula)
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W=0,H=0,dpr=1,G={};
+  const CAMH=0.98, Z0=1.95, OFF=0.44, EL=24*Math.PI/180, V0=12.5, GRAV=9.8;
+  function geom(){
+    const mobile=W<700;
+    const t=$(".introTxt"); const tb=t?t.getBoundingClientRect().bottom-cv.getBoundingClientRect().top:H*.4;
+    const vx=mobile?W*.5:W*.66;
+    let hz=mobile?Math.max(tb+34,H*.36):H*.40;
+    let f=mobile?Math.min(W*1.05,(H*.90-hz)/(CAMH/Z0)):Math.min(W*.55,(H*.88-hz)/(CAMH/Z0));
+    G={mobile,vx,hz,f};
+  }
+  const P=(X,Y,Z)=>{const z=Math.max(.05,Z);return[G.vx+X*G.f/z, G.hz+(CAMH-Y)*G.f/z, G.f/z];};
+  function paintBg(){
+    const {hz,vx,f}=G; bgx.setTransform(dpr,0,0,dpr,0,0); bgx.clearRect(0,0,W,H);
+    // cielo
+    let g=bgx.createLinearGradient(0,0,0,hz); g.addColorStop(0,"#DCE8F1"); g.addColorStop(.7,"#EEF2EE"); g.addColorStop(1,"#F6F1E4");
+    bgx.fillStyle=g; bgx.fillRect(0,0,W,hz+1);
+    const sun=bgx.createRadialGradient(W*.18,hz-10,4,W*.18,hz-10,W*.5); sun.addColorStop(0,"rgba(255,236,190,.75)"); sun.addColorStop(1,"rgba(255,236,190,0)");
+    bgx.fillStyle=sun; bgx.fillRect(0,0,W,hz);
+    // montes lejanos y arboleda
+    bgx.fillStyle="rgba(120,140,128,.35)"; bgx.beginPath(); bgx.moveTo(0,hz);
+    for(let x=0;x<=W;x+=W/12) bgx.lineTo(x,hz-10-18*Math.abs(Math.sin(x*.004+1.3))-8*Math.sin(x*.013)); bgx.lineTo(W,hz); bgx.fill();
+    bgx.fillStyle="rgba(62,92,66,.55)";
+    for(let x=-10;x<W+10;x+=7){const h=4+5*Math.abs(Math.sin(x*.07))+(Math.sin(x*.021)>.55?7:0); bgx.beginPath(); bgx.ellipse(x,hz-h*.5,5,h*.6,0,0,Math.PI*2); bgx.fill();}
+    // tierra
+    g=bgx.createLinearGradient(0,hz,0,H); g.addColorStop(0,"#B9B48C"); g.addColorStop(.35,"#9C9461"); g.addColorStop(1,"#7D7244");
+    bgx.fillStyle=g; bgx.fillRect(0,hz,W,H-hz);
+    // surcos de cultivo en perspectiva (filas a 0,75 m)
+    const zN=.35, zF=160;
+    for(let k=-90;k<=90;k++){
+      const X0=k*.75-.17, X1=k*.75+.17;
+      const a=P(X0,0,zN),b=P(X1,0,zN),c=P(X1,0,zF),d=P(X0,0,zF);
+      bgx.fillStyle=(k%2)?"rgba(86,120,58,.55)":"rgba(98,134,64,.55)";
+      bgx.beginPath(); bgx.moveTo(a[0],a[1]); bgx.lineTo(b[0],b[1]); bgx.lineTo(c[0],c[1]); bgx.lineTo(d[0],d[1]); bgx.fill();
+    }
+    // textura de matas cerca
+    for(let i=0;i<900;i++){const k=Math.round((Math.random()-.5)*40), Z=.4+Math.pow(Math.random(),2)*14; const p=P(k*.75+(Math.random()-.5)*.25,0,Z); const s=Math.max(.6,.05*p[2]);
+      bgx.strokeStyle=`rgba(${60+Math.random()*30|0},${100+Math.random()*40|0},45,.6)`; bgx.lineWidth=Math.max(.6,s*.35);
+      bgx.beginPath(); bgx.moveTo(p[0],p[1]); bgx.lineTo(p[0]+(Math.random()-.5)*s*2,p[1]-s*(2+Math.random()*3)); bgx.stroke();}
+    // bruma hacia el horizonte
+    g=bgx.createLinearGradient(0,hz,0,hz+(H-hz)*.45); g.addColorStop(0,"rgba(240,238,226,.95)"); g.addColorStop(1,"rgba(240,238,226,0)");
+    bgx.fillStyle=g; bgx.fillRect(0,hz,W,(H-hz)*.45);
+  }
+  function size(){dpr=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;
+    [cv,bg,wet].forEach(c=>{c.width=W*dpr;c.height=H*dpr}); ctx.setTransform(dpr,0,0,dpr,0,0); wx.setTransform(dpr,0,0,dpr,0,0);
+    geom(); paintBg();}
+  size(); addEventListener("resize",size);
+
+  let lastY=scrollY, push=0, act=0, theta=-.5, arm=0, armV=0, armPhase=0, parts=[], lens=[], cleared=true, visible=true, hitFlash=0;
+  addEventListener("scroll",()=>{const y=scrollY;push+=Math.abs(y-lastY);lastY=y;},{passive:true});
+  new IntersectionObserver(es=>{visible=es[0].isIntersecting}).observe(sec);
+  const prog=()=>{const r=sec.getBoundingClientRect();return Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));};
+
+  // ---- dibujo de piezas metálicas ----
+  function cylV(X,Z,y0,y1,r,cols){ // cilindro vertical
+    const a=P(X,y1,Z), b=P(X,y0,Z), w=r*a[2];
+    const g=ctx.createLinearGradient(a[0]-w,0,a[0]+w,0);
+    g.addColorStop(0,cols[0]); g.addColorStop(.35,cols[1]); g.addColorStop(.55,cols[2]); g.addColorStop(1,cols[0]);
+    ctx.fillStyle=g; ctx.fillRect(a[0]-w,a[1],w*2,b[1]-a[1]);
+    ctx.fillStyle=cols[1]; ctx.beginPath(); ctx.ellipse(a[0],a[1],w,w*.28,0,0,Math.PI*2); ctx.fill();
+  }
+  function tube(p0,p1,r0,r1,cols){ // tubo inclinado con brillo
+    const a=P(...p0), b=P(...p1); const w0=r0*a[2], w1=r1*b[2];
+    const dx=b[0]-a[0], dy=b[1]-a[1], L=Math.hypot(dx,dy)||1, nx=-dy/L, ny=dx/L;
+    const g=ctx.createLinearGradient(a[0]+nx*w0,a[1]+ny*w0,a[0]-nx*w0,a[1]-ny*w0);
+    g.addColorStop(0,cols[0]); g.addColorStop(.4,cols[2]); g.addColorStop(.6,cols[1]); g.addColorStop(1,cols[0]);
+    ctx.fillStyle=g; ctx.beginPath();
+    ctx.moveTo(a[0]+nx*w0,a[1]+ny*w0); ctx.lineTo(b[0]+nx*w1,b[1]+ny*w1); ctx.lineTo(b[0]-nx*w1,b[1]-ny*w1); ctx.lineTo(a[0]-nx*w0,a[1]-ny*w0); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.arc(b[0],b[1],w1,0,Math.PI*2); ctx.fillStyle=cols[0]; ctx.fill();
+    return [a,b];
+  }
+  const BRASS=["#6B4A14","#E8C46C","#C29434"], GALV=["#5E676C","#E3E8EA","#9AA3A8"], BRONZE=["#3B2A10","#A07A3C","#6E5224"], ARMC=["#2E3B33","#7E9488","#4C5E54"];
+
+  function drawSprinkler(){
+    const Zs=Z0, c=Math.cos(theta), s=Math.sin(theta);
+    // dirección horizontal de la boquilla: X=sin(theta), Z=cos(theta)  (theta=0 → hacia el fondo)
+    const dx=Math.sin(theta), dz=Math.cos(theta);
+    // sombra y estaca
+    const g0=P(0,0,Zs); ctx.fillStyle="rgba(30,35,20,.30)"; ctx.beginPath(); ctx.ellipse(g0[0],g0[1],.16*g0[2],.035*g0[2],0,0,Math.PI*2); ctx.fill();
+    cylV(0,Zs,0,(1.14-OFF),.021,GALV);                       // elevador galvanizado
+    // marcas de rosca
+    const rt=P(0,(1.14-OFF),Zs); ctx.strokeStyle="rgba(60,66,70,.5)"; ctx.lineWidth=1;
+    for(let i=1;i<5;i++){const yy=rt[1]+i*.006*rt[2]; ctx.beginPath(); ctx.moveTo(rt[0]-.021*rt[2],yy); ctx.lineTo(rt[0]+.021*rt[2],yy); ctx.stroke();}
+    cylV(0,Zs,(1.14-OFF),(1.175-OFF),.031,BRASS);                  // manguito hexagonal
+    cylV(0,Zs,(1.175-OFF),(1.215-OFF),.024,BRASS);                 // cojinete
+    cylV(0,Zs,(1.215-OFF),(1.235-OFF),.027,["#1F2622","#5B6A62","#3A4640"]); // junta
+    // cabeza giratoria
+    const back = dz>0; // si la boquilla apunta al fondo, se dibuja antes que el cuerpo
+    const base=[0,(1.262-OFF),Zs], tip=[dx*.135*Math.cos(EL),(1.262-OFF)+.135*Math.sin(EL),Zs+dz*.135*Math.cos(EL)];
+    const nozzle=()=>{tube(base,tip,.016,.0085,BRASS); const t=P(...tip); ctx.fillStyle="#2B2010"; ctx.beginPath(); ctx.arc(t[0],t[1],.005*t[2],0,Math.PI*2); ctx.fill();};
+    // boquilla secundaria corta al lado contrario
+    const tip2=[-dx*.05,(1.25-OFF),Zs-dz*.05];
+    if(back) nozzle(); else tube(base,tip2,.012,.008,BRASS);
+    cylV(0,Zs,(1.235-OFF),(1.30-OFF),.022,BRASS);                  // cuerpo
+    if(back) tube(base,tip2,.012,.008,BRASS); else nozzle();
+    // eje y muelle
+    cylV(0,Zs,(1.30-OFF),(1.385-OFF),.0055,GALV);
+    const sp=P(0,(1.30-OFF),Zs), sp2=P(0,(1.38-OFF),Zs); ctx.strokeStyle="#2A3530"; ctx.lineWidth=Math.max(1,.0035*sp[2]);
+    ctx.beginPath(); for(let i=0;i<=14;i++){const yy=sp[1]+(sp2[1]-sp[1])*i/14, xx=sp[0]+Math.sin(i*Math.PI)*0+((i%2)?1:-1)*.013*sp[2]; ctx.lineTo(xx,yy);} ctx.stroke();
+    // brazo de impacto (gira alrededor del eje, desplazado del chorro según arm)
+    const aa=theta+arm, ax=Math.sin(aa), az=Math.cos(aa);
+    const pv=[0,(1.375-OFF),Zs], fr=[ax*.15,(1.36-OFF),Zs+az*.15], bk=[-ax*.07,(1.37-OFF),Zs-az*.07];
+    const spoonTop=[ax*.15,(1.36-OFF),Zs+az*.15], spoonBot=[ax*.152,(1.305-OFF),Zs+az*.152];
+    tube(bk,pv,.007,.006,ARMC); tube(pv,fr,.006,.005,ARMC);
+    tube(spoonTop,spoonBot,.007,.009,BRONZE);          // cuchara/deflector
+    const cw=P(...bk); ctx.fillStyle="#24302A"; ctx.beginPath(); ctx.arc(cw[0],cw[1],.014*cw[2],0,Math.PI*2); ctx.fill(); // contrapeso
+    const pvp=P(...pv); ctx.fillStyle="#C9A04A"; ctx.beginPath(); ctx.arc(pvp[0],pvp[1],.008*pvp[2],0,Math.PI*2); ctx.fill();
+    return tip;
+  }
+
+  function frame(){
+    requestAnimationFrame(frame);
+    if(!visible){push=0;return;}
+    const p=prog();
+    const sv=Math.min(90,push); push=0;
+    act=act*.93+(sv/90)*.55; if(p>.02&&p<.995) act=Math.max(act,.14); if(p<=.003) act*=.8;
+    const target=-.5+p*Math.PI*2.2;
+    // ciclo del brazo: sale empujado por el chorro y vuelve con el muelle; al golpear, la cabeza avanza
+    if(act>.05){armPhase+=.05+act*.22;}
+    const prevArm=arm; arm=Math.max(0,Math.sin(armPhase))*1.1*(0.35+Math.min(1,act*2)*.65);
+    if(prevArm>.05&&arm<=.02&&act>.05){ // golpe
+      const d=target-theta; theta+=Math.sign(d)*Math.min(Math.abs(d),.05+Math.abs(d)*.35); hitFlash=1;
+    }
+    hitFlash*=.85;
+    if(p<.004&&!cleared){wx.clearRect(0,0,W,H);cleared=true;lens=[];} if(p>.02) cleared=false;
+
+    ctx.clearRect(0,0,W,H); ctx.drawImage(bg,0,0,W,H); ctx.drawImage(wet,0,0,W,H);
+    if(!G.mobile){const wg=ctx.createLinearGradient(0,0,W*.55,0); wg.addColorStop(0,'rgba(248,246,238,.82)'); wg.addColorStop(1,'rgba(248,246,238,0)'); ctx.save(); const op=Math.max(0,1-prog()*1.2); ctx.globalAlpha=op; ctx.fillStyle=wg; ctx.fillRect(0,0,W*.55,H); ctx.restore();}
+
+    // ---- agua ----
+    const dt=1/60*.85, tipPos=[Math.sin(theta)*.135*Math.cos(EL),1.262-OFF+.135*Math.sin(EL),Z0+Math.cos(theta)*.135*Math.cos(EL)];
+    const n=reduce?0:Math.round(act*5);
+    const dirx=Math.sin(theta), dirz=Math.cos(theta);
+    for(let i=0;i<n;i++){
+      const k=Math.random(), v=V0*(.55+.45*Math.pow(k,.35)), e=EL+(Math.random()-.5)*.05, yj=(Math.random()-.5)*.05;
+      const hx=Math.sin(theta+yj), hzz=Math.cos(theta+yj);
+      parts.push({x:tipPos[0],y:tipPos[1],z:tipPos[2],vx:hx*v*Math.cos(e),vy:v*Math.sin(e),vz:hzz*v*Math.cos(e),px:null,py:null,m:Math.random()<.15});
+    }
+    if(hitFlash>.9&&!reduce){ // abanico al golpear la cuchara
+      for(let i=0;i<26;i++){const yj=(Math.random()-.5)*.9, v=2+Math.random()*4, e=Math.random()*.6;
+        parts.push({x:tipPos[0],y:tipPos[1],z:tipPos[2],vx:Math.sin(theta+yj)*v*Math.cos(e),vy:v*Math.sin(e),vz:Math.cos(theta+yj)*v*Math.cos(e),px:null,py:null,m:true});}
+    }
+
+    // ---- chorro continuo (trayectoria balística) ----
+    const jet=[]; if(act>.04){const vx0=dirx*V0*Math.cos(EL), vy0=V0*Math.sin(EL), vz0=dirz*V0*Math.cos(EL);
+      for(let t=0;t<3;t+=.018){const x=tipPos[0]+vx0*t, y=tipPos[1]+vy0*t-GRAV*t*t/2, z=tipPos[2]+vz0*t; if(y<0||z<.35)break; jet.push([x,y,z,t]);}
+      // gotas que se desprenden del chorro
+      if(!reduce&&jet.length>8){const m=Math.round(act*22); for(let i=0;i<m;i++){const j=jet[Math.floor(jet.length*(.35+.65*Math.random()))]; const t=j[3];
+        parts.push({x:j[0],y:j[1],z:j[2],vx:vx0*(.9+Math.random()*.2)+(Math.random()-.5)*1.2,vy:(vy0-GRAV*t)+(Math.random()-.5)*1.2,vz:vz0*(.9+Math.random()*.2)+(Math.random()-.5)*1.2,px:null,py:null,m:Math.random()<.5});}}
+    }
+    const drawJet=(front)=>{ if(jet.length<2)return; const T=jet[jet.length-1][3];
+      for(let i=1;i<jet.length;i++){const q=jet[i],o=jet[i-1]; if(front!==(q[2]<Z0))continue;
+        const a=P(o[0],o[1],o[2]), b=P(q[0],q[1],q[2]); const u=q[3]/T;
+        const w=Math.min(14,Math.max(1,.011*b[2]*(1+u*1.4))); const al=Math.min(1,act*2.2)*(1-Math.pow(u,2.2)*.85);
+        ctx.lineCap="round"; ctx.strokeStyle=`rgba(80,140,200,${.78*al})`; ctx.lineWidth=w; ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
+        if(u<.6){ctx.strokeStyle=`rgba(255,255,255,${.55*al})`; ctx.lineWidth=w*.28; ctx.beginPath(); ctx.moveTo(a[0],a[1]-w*.15); ctx.lineTo(b[0],b[1]-w*.15); ctx.stroke();}
+      }};
+    // separar las gotas que van detrás del aspersor (se dibujan antes) y delante
+    const drawDrops=(front)=>{
+      for(let i=parts.length-1;i>=0;i--){const q=parts[i];
+        if(front!==(q.z<Z0)) continue;
+        const a=P(q.x,q.y,q.z);
+        if(q.px!==null){
+          const w=Math.min(7,Math.max(.6,(q.m?.006:.010)*a[2]));
+          ctx.strokeStyle=q.m?"rgba(170,205,235,.55)":"rgba(70,130,190,.80)"; ctx.lineWidth=w; ctx.lineCap="round";
+          ctx.beginPath(); ctx.moveTo(q.px,q.py); ctx.lineTo(a[0],a[1]); ctx.stroke();
+          if(!q.m&&w>2.2){ctx.strokeStyle="rgba(255,255,255,.55)";ctx.lineWidth=w*.3;ctx.beginPath();ctx.moveTo(q.px,q.py);ctx.lineTo(a[0],a[1]);ctx.stroke();}
+        }
+        q.px=a[0]; q.py=a[1];
+      }
+    };
+    // física
+    for(let i=parts.length-1;i>=0;i--){const q=parts[i];
+      q.vy-=GRAV*dt; q.vx*=.995; q.vz*=.995; q.x+=q.vx*dt; q.y+=q.vy*dt; q.z+=q.vz*dt;
+      if(q.z<.32){ // pasa por la cámara: gota en la lente
+        if(q.y>CAMH-1.2&&q.y<CAMH+1.2&&Math.random()<.18&&lens.length<14){const a=P(q.x,q.y,.4);lens.push({x:a[0],y:a[1],r:6+Math.random()*16,l:1});}
+        parts.splice(i,1); continue;}
+      if(q.y<=0){const a=P(q.x,0,q.z); const r=Math.max(1,.05*a[2]); if(r<2.2&&Math.random()<.85){parts.splice(i,1);continue;}
+        wx.fillStyle="rgba(58,62,34,.035)"; wx.beginPath(); wx.ellipse(a[0]+(Math.random()-.5)*r*3,a[1]+(Math.random()-.5)*r*.6,r*3.2,r*.8,0,0,Math.PI*2); wx.fill();
+        if(r>3&&Math.random()<.3){wx.fillStyle="rgba(170,200,225,.10)"; wx.beginPath(); wx.ellipse(a[0],a[1],r*.8,r*.22,0,0,Math.PI*2); wx.fill();}
+        parts.splice(i,1); continue;}
+    }
+    if(parts.length>2600) parts.splice(0,parts.length-2600);
+    drawJet(false); drawDrops(false);
+    drawSprinkler();
+    drawJet(true); drawDrops(true);
+    // niebla junto a la boquilla
+    if(act>.08){const t=P(...tipPos); const mg=ctx.createRadialGradient(t[0],t[1],1,t[0],t[1],.25*t[2]); mg.addColorStop(0,`rgba(225,238,248,${.35*Math.min(1,act*2)})`); mg.addColorStop(1,"rgba(225,238,248,0)"); ctx.fillStyle=mg; ctx.beginPath(); ctx.arc(t[0],t[1],.25*t[2],0,Math.PI*2); ctx.fill();}
+    // gotas en la lente
+    for(let i=lens.length-1;i>=0;i--){const d=lens[i]; d.l-=.006; if(d.l<=0){lens.splice(i,1);continue;}
+      const g=ctx.createRadialGradient(d.x-d.r*.3,d.y-d.r*.3,1,d.x,d.y,d.r); g.addColorStop(0,`rgba(255,255,255,${.55*d.l})`); g.addColorStop(.6,`rgba(190,215,235,${.18*d.l})`); g.addColorStop(1,`rgba(120,160,200,${.30*d.l})`);
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fill(); d.y+=.15;}
+    // rótulo técnico
+    if(!G.mobile||true){const a=P(.09,.42,Z0), b=P(0,.42,Z0); ctx.strokeStyle="rgba(20,53,42,.55)"; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(b[0]+.03*b[2],b[1]); ctx.lineTo(a[0]+20,b[1]); ctx.stroke();
+      ctx.fillStyle="#14352A"; ctx.font=`500 ${G.mobile?11:12}px "IBM Plex Mono",monospace`; ctx.textAlign="left";
+      ctx.fillText("ASPERSOR DE IMPACTO · LATÓN",a[0]+24,b[1]+4); ctx.fillStyle="rgba(20,53,42,.7)"; ctx.fillText("ELEVADOR GALVANIZADO",a[0]+24,b[1]+20);}
+    // HUD
+    const deg=Math.round(((theta+.5)*180/Math.PI));
+    $("#hudR").textContent="GIRO "+Math.max(0,deg)+"°";
+    $("#hudBar").style.width=(p*100).toFixed(1)+"%";
+    $("#hudL").textContent=p>.97?"▼ SIGUE":"▼ BAJA";
+    const it=$(".introTxt"); it.style.opacity=String(1-Math.max(0,(p-.82)/.18));
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ================= PLANO DE FINCA ================= */
+let plState=null;
+function drawPlano(){
+  const ha=+$("#ha").value, r=+$("#forma").value, [a,b]=$("#marco").value.split("x").map(Number);
+  $("#haV").textContent=ha+" ha";
+  const A=ha*10000, L=Math.sqrt(A*r), Wd=A/L;
+  const padL=56, padT=28, maxW=600-padL-28, maxH=380-padT-70;
+  const k=Math.min(maxW/L,maxH/Wd), w=L*k, h=Wd*k, x0=padL+(maxW-w)/2, y0=padT+(maxH-h)/2;
+  const cols=Math.max(1,Math.round(L/a)), rows=Math.max(1,Math.round(Wd/b));
+  const dx=w/cols, dy=h/rows, R=Math.max(dx,dy)*0.72, sr=Math.max(1.4,Math.min(3.6,Math.min(dx,dy)*0.16));
+  let g=`<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="rgba(20,53,42,.07)" stroke-width="2"/></pattern></defs>`;
+  g+=`<rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="url(#hatch)" stroke="#14352A" stroke-width="1.6"/>`;
+  for(let j=1;j<rows;j++){const y=y0+h-j*dy;g+=`<line x1="${x0}" x2="${x0+w}" y1="${y}" y2="${y}" stroke="rgba(20,53,42,.28)" stroke-width=".7" stroke-dasharray="3 3"/>`;}
+  // línea base
+  g+=`<line x1="${x0}" x2="${x0+w}" y1="${y0+h}" y2="${y0+h}" stroke="#2B6CB0" stroke-width="3"/>`;
+  g+=`<text x="${x0}" y="${y0+h+14}" style="fill:#2B6CB0;font-weight:600">LÍNEA BASE</text>`;
+  // cota de calle
+  if(rows>1){const yA=y0+h, yB=y0+h-dy, xc=x0+w+10;g+=`<line x1="${xc}" x2="${xc}" y1="${yA}" y2="${yB}" stroke="#14352A"/><line x1="${xc-4}" x2="${xc+4}" y1="${yA}" y2="${yA}" stroke="#14352A"/><line x1="${xc-4}" x2="${xc+4}" y1="${yB}" y2="${yB}" stroke="#14352A"/>`;}
+  // tubería principal (lateral izquierdo) y ramales
+  g+=`<line x1="${x0+dx/2}" x2="${x0+dx/2}" y1="${y0+h}" y2="${y0+dy/2}" stroke="#14352A" stroke-width="2.2"/>`;
+  let wet='<g class="wet" id="wet">', dots='';
+  const many=cols*rows>1600;
+  for(let j=0;j<rows;j++){const y=y0+h-(j+0.5)*dy;
+    g+=`<line x1="${x0+dx/2}" x2="${x0+w-dx/2}" y1="${y}" y2="${y}" stroke="#14352A" stroke-width=".9"/>`;
+    for(let i=0;i<cols;i++){const x=x0+(i+0.5)*dx;
+      if(!many) wet+=`<circle data-row="${j}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${R.toFixed(1)}"/>`;
+      dots+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${sr.toFixed(1)}" fill="#fff" stroke="#14352A" stroke-width="1"/>`;}
+    if(many) wet+=`<circle data-row="${j}" cx="${(x0+w/2).toFixed(1)}" cy="${y.toFixed(1)}" r="${(w/2).toFixed(1)}" transform="scale(1 ${(dy/w*0.9).toFixed(4)})" style="transform-origin:${(x0+w/2).toFixed(1)}px ${y.toFixed(1)}px"/>`;
+  }
+  wet+='</g>';
+  // cotas
+  const yb=y0+h+30, xl=x0-22;
+  g+=`<line x1="${x0}" x2="${x0+w}" y1="${yb}" y2="${yb}" stroke="#14352A"/><line x1="${x0}" x2="${x0}" y1="${yb-5}" y2="${yb+5}" stroke="#14352A"/><line x1="${x0+w}" x2="${x0+w}" y1="${yb-5}" y2="${yb+5}" stroke="#14352A"/>`;
+  g+=`<text x="${x0+w/2}" y="${yb+16}" text-anchor="middle">${Math.round(L)} m</text>`;
+  g+=`<line x1="${xl}" x2="${xl}" y1="${y0}" y2="${y0+h}" stroke="#14352A"/><line x1="${xl-5}" x2="${xl+5}" y1="${y0}" y2="${y0}" stroke="#14352A"/><line x1="${xl-5}" x2="${xl+5}" y1="${y0+h}" y2="${y0+h}" stroke="#14352A"/>`;
+  g+=`<text x="${xl-8}" y="${y0+h/2}" text-anchor="middle" transform="rotate(-90 ${xl-8} ${y0+h/2})">${Math.round(Wd)} m</text>`;
+  // norte
+  g+=`<g transform="translate(578,30)"><path d="M0 -14 L6 6 L0 2 L-6 6Z" fill="#14352A"/><text y="20" text-anchor="middle">N</text></g>`;
+  $("#plSvg").innerHTML=g+wet+dots;
+  const count=cols*rows;
+  $("#outA").textContent=count.toLocaleString("es-ES");
+  $("#outC").textContent=rows;
+  $("#outR").textContent=Math.round(rows*(L-a)).toLocaleString("es-ES")+" m";
+  $("#plDim").textContent=`${Math.round(L)} × ${Math.round(Wd)} m · CALLE ${b} m`;
+  plState={ha,r,a,b,count,rows,L,Wd};
+}
+let regarT=[];
+function regar(){
+  regarT.forEach(clearTimeout);regarT=[];
+  const wet=$("#wet"); if(!wet) return; wet.classList.remove("fade");
+  const cs=[...wet.querySelectorAll("circle")]; cs.forEach(c=>c.classList.remove("on"));
+  const rows=plState.rows, step=Math.min(160,2400/rows);
+  for(let j=0;j<rows;j++) regarT.push(setTimeout(()=>wet.querySelectorAll(`circle[data-row="${j}"]`).forEach(c=>c.classList.add("on")),60+j*step));
+  regarT.push(setTimeout(()=>wet.classList.add("fade"),60+rows*step+2600));
+  regarT.push(setTimeout(()=>{cs.forEach(c=>c.classList.remove("on"));wet.classList.remove("fade")},60+rows*step+4000));
+}
+["ha","forma","marco"].forEach(id=>$("#"+id).addEventListener("input",drawPlano));
+$("#regar").onclick=regar;
+$("#pedirFinca").onclick=()=>{const f=$("#forma").selectedOptions[0].text.toLowerCase();
+  S.finca=`Presupuesto finca ${plState.ha} ha (${f}) · marco ${plState.a}×${plState.b} m · ≈ ${plState.count} aspersores en ${plState.rows} calles`;
+  renderCart();drawer(true);toast("Finca añadida al pedido");};
+drawPlano();
+
+/* ================= ESQUEMA DE INSTALACIÓN ================= */
+let instPart="aspersion";
+(function(){
+  const callout=(n,x,y,lx,ly)=>`<line x1="${x}" y1="${y+14}" x2="${lx}" y2="${ly}" stroke="#14352A" stroke-width="1" stroke-dasharray="2 3"/><circle class="callout" cx="${x}" cy="${y}" r="14"/><text class="cnum" x="${x}" y="${y+5}" text-anchor="middle" style="font-weight:600">${n}</text>`;
+  const G=440, gy=262;
+  let s=`<defs><pattern id="soil" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="rgba(120,90,50,.18)" stroke-width="3"/></pattern></defs>`;
+  s+=`<rect x="0" y="${gy}" width="1000" height="140" fill="url(#soil)"/><line x1="0" x2="1000" y1="${gy}" y2="${gy}" stroke="#14352A" stroke-width="2"/>`;
+  // caseta
+  s+=`<path d="M30 ${gy} V120 L180 70 L330 120 V${gy}" fill="none" stroke="#14352A" stroke-width="1.5" stroke-dasharray="6 4"/><text x="180" y="108" text-anchor="middle" style="font-size:12px;fill:#76837B">CASETA</text>`;
+  // pozo
+  s+=`<rect x="56" y="${gy}" width="28" height="130" fill="#fff" stroke="#14352A" stroke-width="1.5"/><rect x="58" y="${gy+70}" width="24" height="58" fill="rgba(43,108,176,.25)"/><text x="70" y="${gy+150}" text-anchor="middle" style="font-size:12px;fill:#76837B">POZO</text>`;
+  s+=`<g><rect x="44" y="200" width="52" height="${gy-200}" rx="6" fill="#fff" stroke="#14352A" stroke-width="2"/><circle cx="70" cy="228" r="13" fill="none" stroke="#14352A" stroke-width="2"/><text x="70" y="190" text-anchor="middle" style="font-size:12px">BOMBA</text></g>`;
+  // tubería caseta
+  s+=`<path d="M96 240 H150 M190 240 H220 V${gy+30} H${G-30}" stroke="#14352A" stroke-width="5" fill="none"/>`;
+  s+=`<path class="wflow" d="M96 240 H150 M190 240 H220 V${gy+30} H${G-30}"/>`;
+  // filtro
+  s+=`<g data-part="filtrar"><rect class="ln" x="150" y="190" width="40" height="${gy-190}" rx="10"/><line x1="150" x2="190" y1="214" y2="214" stroke="#14352A" stroke-width="1.5"/>${[226,236,246].map(y=>`<line x1="158" x2="182" y1="${y}" y2="${y}" stroke="#2B6CB0" stroke-width="1.5"/>`).join("")}${callout(1,170,40,170,186)}</g>`;
+  // programador
+  s+=`<g data-part="programar"><rect class="ln" x="250" y="150" width="58" height="52" rx="6"/><rect x="258" y="158" width="42" height="14" fill="#2B6CB0" opacity=".7"/><circle cx="279" cy="186" r="7" fill="none" stroke="#14352A" stroke-width="1.5"/>${callout(2,279,40,279,146)}</g>`;
+  s+=`<path d="M308 190 C 360 190, ${G-40} 210, ${G} ${gy+8}" fill="none" stroke="#C98A2E" stroke-width="1.5" stroke-dasharray="5 4"/><text x="372" y="198" style="font-size:11px;fill:#C98A2E">CABLE 24 V</text>`;
+  // arqueta + válvula
+  s+=`<g data-part="valvulas"><rect x="${G-34}" y="${gy}" width="98" height="64" fill="#fff" stroke="#14352A" stroke-width="1.5"/><rect class="ln" x="${G-6}" y="${gy+18}" width="42" height="26" rx="4"/><rect class="ln" x="${G+6}" y="${gy+2}" width="18" height="16" rx="3"/>${callout(3,G+15,40,G+15,gy-4)}</g>`;
+  // tubería principal enterrada
+  s+=`<g data-part="tuberia"><path class="ln" d="M${G+36} ${gy+30} H980" style="fill:none;stroke-width:7"/><path class="wflow" d="M${G+36} ${gy+30} H980"/><text x="${G+70}" y="${gy+58}" style="font-size:12px">TUBERÍA ENTERRADA</text>${callout(4,700,gy+100,700,gy+36)}</g>`;
+  // aspersores
+  let asp="";
+  [600,760,920].forEach((x,i)=>{asp+=`<line x1="${x}" x2="${x}" y1="${gy+28}" y2="${gy-46}" stroke="#14352A" stroke-width="3"/><rect class="ln" x="${x-9}" y="${gy-60}" width="18" height="16" rx="3"/><path d="M${x} ${gy-60} q -70 -80 -150 10 M${x} ${gy-60} q 60 -70 120 0" fill="none" stroke="#2B6CB0" stroke-width="1.6" stroke-dasharray="3 6" class="spray"/>`;});
+  s+=`<g data-part="aspersion">${asp}${callout(5,840,40,760,gy-64)}</g>`;
+  s+=`<text x="990" y="${gy+92}" text-anchor="end" style="font-size:11px;fill:#76837B">ESQUEMA ORIENTATIVO · NO A ESCALA</text>`;
+  $("#instSvg").innerHTML=s;
+})();
+function renderInst(){
+  $$("#instSvg [data-part]").forEach(g=>g.classList.toggle("on",g.dataset.part===instPart));
+  const items=S.productos.filter(p=>p.cat===instPart), c=CATS[instPart];
+  $("#instPanel").innerHTML=`<div class="mono" style="font-size:12px;color:var(--muted)">${ORDER.indexOf(instPart)+1} · ${c.n.toUpperCase()}</div><h3>${c.t}</h3><p style="color:var(--ink2);font-size:15px;margin-bottom:10px">${c.d}</p>`+
+   (items.slice(0,6).map(p=>{const pr=pricing(p);return `<div class="row"><div class="ph">${fotos(p)[0]?`<img src="${imgSrc(fotos(p)[0])}" alt="">`:icon(p.cat)}</div><div><b>${esc(p.nombre)}</b><small>${esc(p.marca)}${pr.ahorro>0.004?` · ahorras ${eur(pr.ahorro)}`:""}</small></div><div class="pr">${pr.precio==null?"<small>Consultar</small>":eur(pr.precio)}<br><button data-add="${esc(p.id)}">Añadir</button></div></div>`}).join("")||`<p class="pend">Próximamente.</p>`)+
+   `<button class="btn ghost" style="margin-top:14px;padding:10px 16px" data-gocat="${instPart}">Ver ${items.length>6?"las "+items.length+" piezas":"en el catálogo"} →</button>`;
+}
+document.addEventListener("click",e=>{const g=e.target.closest("#instSvg [data-part]");if(g){instPart=g.dataset.part;renderInst();if(innerWidth<900)$("#instPanel").scrollIntoView({behavior:"smooth",block:"nearest"});}});
+
+/* reveal on scroll */
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.12});
+function observeReveals(){ $$(".reveal:not(.in)").forEach(el=>io.observe(el)); }
+
+/* ================= PEDIDO ================= */
+let cart={};
+try{cart=JSON.parse(localStorage.getItem("dp_cart")||"{}")}catch(e){}
+function saveCart(){try{localStorage.setItem("dp_cart",JSON.stringify(cart))}catch(e){} renderCart()}
+function addToCart(id){cart[id]=(cart[id]||0)+1;saveCart();toast("Añadido al pedido");}
+function renderCart(){
+  const lines=Object.entries(cart).filter(([,q])=>q>0).map(([id,q])=>({p:S.productos.find(x=>x.id===id),q})).filter(l=>l.p);
+  $("#cartCount").textContent=lines.reduce((a,l)=>a+l.q,0)+(S.finca?1:0);
+  let tot=0,sav=0;
+  const fincaHTML=S.finca?`<div class="line"><div class="n">${esc(S.finca)}<br><small style="color:var(--muted)">Lo revisa un técnico y te da precio</small></div><button class="mini" data-delfinca>Quitar</button></div>`:"";
+  $("#cartBody").innerHTML=fincaHTML+(lines.length||S.finca?"":"")+(lines.length?lines.map(({p,q})=>{const pr=pricing(p);if(pr.precio){tot+=pr.precio*q;sav+=pr.ahorro*q}
+    return `<div class="line"><div class="n">${esc(p.nombre)}<br><small style="color:var(--muted)">${pr.precio?eur(pr.precio)+" / ud":"Precio a consultar"}</small></div>
+    <div class="qty"><button data-q="${p.id}" data-d="-1">−</button><b>${q}</b><button data-q="${p.id}" data-d="1">+</button></div></div>`}).join(""):(S.finca?"":`<p style="color:var(--muted);padding:20px 0">Aún no has añadido nada.</p>`));
+  $("#cartTotal").textContent=eur(tot);
+  $("#cartSave").textContent=sav>0?`Te ahorras ${eur(sav)} frente a la competencia`:"";
+}
+document.addEventListener("click",e=>{if(e.target.closest("[data-delfinca]")){S.finca=null;renderCart();return}const b=e.target.closest("[data-q]");if(b){cart[b.dataset.q]=Math.max(0,(cart[b.dataset.q]||0)+ +b.dataset.d);saveCart();}});
+function drawer(on){$("#drawer").classList.toggle("on",on);$("#scrim").classList.toggle("on",on)}
+$("#openCart").onclick=()=>drawer(true);$("#closeCart").onclick=()=>drawer(false);$("#scrim").onclick=()=>drawer(false);
+$("#copyOrder").onclick=async()=>{
+  const lines=Object.entries(cart).filter(([,q])=>q>0).map(([id,q])=>{const p=S.productos.find(x=>x.id===id);const pr=p?pricing(p):{};return p?`${q} x ${p.nombre}${pr.precio?" — "+eur(pr.precio*q):" — a consultar"}`:""}).filter(Boolean);
+  if(S.finca) lines.unshift(S.finca);
+  if(!lines.length){toast("El pedido está vacío");return}
+  const txt="Pedido DRESAPLAST\n"+lines.join("\n")+"\nTotal: "+$("#cartTotal").textContent;
+  try{await navigator.clipboard.writeText(txt);toast("Pedido copiado")}catch(e){toast("No se pudo copiar; selecciónalo a mano")}
+};
+
+/* ================= ASISTENTE ================= */
+const FAQ=[
+ {k:["electrovalvula","electroválvula","valvula","válvula","no abre","no cierra","sector no"],q:"La electroválvula no abre",a:`Vamos por orden:
+1. Gira el solenoide un cuarto de vuelta a la izquierda (apertura manual). Si así riega, la válvula está bien: el fallo es eléctrico.
+2. Con un polímetro, mide en el programador entre el común y la salida del sector mientras está activo: debe dar unos 24 V.
+3. Si hay 24 V en el programador pero no llega a la válvula, revisa empalmes en la arqueta (suelen oxidarse) y que el cable no esté cortado.
+4. Si no cierra: limpia la membrana y el pequeño orificio de purga; una piedrecita basta para dejarla abierta.
+Si tras esto sigue igual, abrimos un parte para un técnico.`},
+ {k:["programador","no riega","no arranca","pantalla","hora"],q:"El programador no riega",a:`1. Comprueba que el selector no está en "Apagado" o "Retraso por lluvia".
+2. Mira si hay un sensor de lluvia conectado: si está mojado o puenteado mal, bloquea el riego. Prueba a ponerlo en "ignorar sensor".
+3. Revisa fecha, hora y que los días de riego estén marcados.
+4. Lanza un sector en manual. Si arranca, el problema es la programación; si no, mide 24 V en la salida.
+5. Si la pantalla está en blanco, revisa el enchufe o el transformador.`},
+ {k:["aspersor","no gira","gira","turbina","se para"],q:"El aspersor no gira",a:`1. Desenrosca la tobera y limpia la boquilla y el filtrito de la entrada: es la causa más habitual.
+2. Comprueba la presión: por debajo de ~2 bar muchos aspersores no giran bien.
+3. En aspersores de impacto (tipo VYR), revisa que el brazo no esté atascado y que el muelle tenga tensión.
+4. En turbinas emergentes, si el vástago no sube, puede haber tierra en la carcasa: límpialo subiéndolo a mano.`},
+ {k:["gotero","goteros","atasc","obstru","goteo","no gotea"],q:"Goteros atascados",a:`1. Limpia el filtro del cabezal: si está sucio, los goteros se taparán otra vez.
+2. Abre los finales de línea y deja correr el agua un par de minutos para purgar.
+3. Si son goteros con cal, una limpieza con ácido apto para riego (siguiendo la dosis del fabricante) suele recuperarlos.
+4. Revisa que la presión de trabajo esté dentro de lo que pide la tubería (normalmente 1 a 2,5 bar en autocompensantes).`},
+ {k:["presion","presión","poca agua","flojo","no llega"],q:"Poca presión",a:`1. Mira el manómetro antes y después del filtro: si la diferencia pasa de 0,5 bar, el filtro está colmatado. Límpialo.
+2. Busca fugas: zonas encharcadas o tubería que sopla.
+3. Comprueba que no riegan más sectores a la vez de los que aguanta el caudal.
+4. Si es grupo de presión, revisa que la bomba no esté aspirando aire.`},
+ {k:["fuga","pierde","rotura","roto","charco","pinchazo"],q:"Fuga en tubería",a:`1. Cierra la llave general o la válvula del sector.
+2. En polietileno, corta el tramo dañado y une con un manguito del mismo diámetro.
+3. En tubería de goteo de 16 mm, un empalme recto lo soluciona en un minuto.
+4. Si la fuga está en una unión roscada, rehaz la junta con teflón o cinta selladora.`},
+ {k:["filtro","colmat","sucio","limpiar filtro"],q:"Filtro colmatado",a:`1. Cierra el agua y abre la tapa del filtro.
+2. En filtros de anillas: suelta el paquete de anillas, sepáralas y lávalas con agua a presión.
+3. En malla: cepíllala con cuidado sin romperla.
+4. Como norma, si la diferencia entre manómetros supera 0,5 bar, toca limpiar.`}
+];
+function faqMatch(t){t=t.toLowerCase();let best=null,sc=0;for(const f of FAQ){const s=f.k.filter(k=>t.includes(k)).length;if(s>sc){sc=s;best=f}}return best}
+function addMsg(txt,who){const d=document.createElement("div");d.className="msg "+who;d.textContent=txt;$("#msgs").appendChild(d);$("#msgs").scrollTop=1e9;return d}
+function bot(on){$("#bot").classList.toggle("on",on);$("#botfab").classList.toggle("hide",on);if(on&&!$("#msgs").children.length){addMsg("Hola, soy el asistente de riego de DRESAPLAST. Cuéntame qué le pasa a tu instalación y lo resolvemos paso a paso.","b")}}
+document.addEventListener("click",e=>{if(e.target.closest("[data-openbot]"))bot(true)});
+$("#closeBot").onclick=()=>bot(false);
+$("#quick").innerHTML=FAQ.slice(0,6).map(f=>`<button data-faq="${esc(f.q)}">${f.q}</button>`).join("");
+$("#faultBtns").innerHTML=FAQ.slice(0,5).map(f=>`<button data-faq="${esc(f.q)}">${f.q} →</button>`).join("");
+document.addEventListener("click",e=>{const b=e.target.closest("[data-faq]");if(b){bot(true);ask(b.dataset.faq)}});
+$("#botForm").onsubmit=e=>{e.preventDefault();const v=$("#botIn").value.trim();if(!v)return;$("#botIn").value="";ask(v)};
+
+function botContext(){
+  const cat=S.productos.map(p=>{const pr=pricing(p);return `- ${p.nombre} (${p.marca}): ${pr.precio?eur(pr.precio):"precio a consultar"}`}).join("\n");
+  const faq=FAQ.map(f=>`## ${f.q}\n${f.a}`).join("\n\n");
+  return `Eres el asistente de averías de DRESAPLAST, empresa de material de riego de León (España). Atiendes sobre todo a agricultores y ganaderos: habla claro, cercano, en español de España, sin tecnicismos innecesarios.
+Objetivo: resolver la avería sin que tenga que venir un técnico. Haz como mucho una pregunta cada vez si te falta un dato clave (tipo de instalación, marca, qué ve exactamente). Da pasos numerados y cortos, de lo más probable a lo menos.
+Si la avería implica electricidad de 230 V, bomba o pozo, o no se resuelve en 2-3 intentos, recomienda abrir un parte con un técnico de DRESAPLAST.
+Si hace falta una pieza, recomienda la del catálogo si encaja. No inventes precios ni piezas fuera del catálogo; si no está, di que lo consulten.
+Responde en texto plano, sin markdown, máximo unas 150 palabras.
+
+Catálogo actual:
+${cat}
+
+Guías internas de averías frecuentes:
+${faq}`;
+}
+let busy=false;
+async function ask(text){
+  if(busy) return; busy=true;
+  $("#quick").classList.add("hide");
+  addMsg(text,"u"); S.chat.push({role:"user",content:text});
+  const out=addMsg("…","b");
+  try{
+    if(!S.sample) throw {code:"none"};
+    const msgs=[{role:"user",content:botContext()+"\n\n---\nPrimera consulta del cliente: "+S.chat[0].content}];
+    S.chat.slice(1).forEach(m=>msgs.push(m));
+    if(msgs.length>1 && msgs[msgs.length-1].role!=="user") msgs.push({role:"user",content:text});
+    const r=await S.sample(msgs,{modelTier:"quick",cache:false,onText:({text})=>{out.textContent=text;$("#msgs").scrollTop=1e9}});
+    out.textContent=r.text; S.chat.push({role:"assistant",content:r.text});
+  }catch(err){
+    if(err&&err.code==="not_granted") S.sample=null;
+    const f=faqMatch(text);
+    const ans=f?f.a:"Para ayudarte mejor, dime qué parte falla: programador, electroválvula, aspersor, goteo, filtro o tubería. Si es algo eléctrico de la bomba o el pozo, mejor que lo vea un técnico.";
+    out.textContent=ans; S.chat.push({role:"assistant",content:ans});
+  }
+  busy=false;
+}
+
+/* ================= FOTOS ================= */
+const fileIn=document.createElement("input");fileIn.type="file";fileIn.accept="image/*";fileIn.style.display="none";document.body.appendChild(fileIn);
+let photoTarget=null;
+document.addEventListener("click",e=>{const b=e.target.closest("[data-photo],[data-herophoto]");if(!b)return;e.stopPropagation();photoTarget=b.dataset.photo||"__hero";fileIn.value="";fileIn.click();});
+function shrink(file){return new Promise((res)=>{const img=new Image();const u=URL.createObjectURL(file);img.onload=()=>{const m=1600,k=Math.min(1,m/Math.max(img.width,img.height));const c=document.createElement("canvas");c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);c.getContext("2d").drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>res(b||file),"image/jpeg",.86)};img.onerror=()=>{URL.revokeObjectURL(u);res(file)};img.src=u;});}
+fileIn.onchange=async()=>{const f=fileIn.files[0];if(!f||!photoTarget)return;if(!S.assets||!S.db){toast("Abre la página con tu cuenta para subir fotos");return}
+  toast("Subiendo foto…");
+  try{const blob=await shrink(f);const a=await S.assets.upload(blob);
+    if(photoTarget==="__hero"){await S.db.doc("config/web").set({heroFotoId:a.id});}
+    else{const pp=S.productos.find(x=>x.id===photoTarget)||{};await S.db.doc("productos/"+photoTarget).update({fotoId:a.id,fotos:[a.id,...fotos(pp).slice(1)]});}
+    toast("Foto guardada");}catch(err){toast("No se pudo subir la foto")}};
+
+/* ================= ROUTER ================= */
+function route(){
+  const h=location.hash.replace("#","");
+  const panel=h.startsWith("panel");
+  $("#tienda").classList.toggle("hide",panel);
+  $("#panel").classList.toggle("hide",!panel);
+  $("#botfab").classList.toggle("hide",panel||$("#bot").classList.contains("on"));
+  $$("[data-shop]").forEach(a=>a.classList.toggle("hide",panel));
+  $("#nav").classList.toggle("solid",panel||scrollY>40);
+  if(panel){bot(false);$("#botfab").classList.add("hide");scrollTo(0,0);renderPanel();}
+}
+addEventListener("hashchange",route);
+
+/* ================= PANEL ================= */
+let tab="resumen";
+$("#tabs").onclick=e=>{const b=e.target.closest("[data-tab]");if(!b)return;tab=b.dataset.tab;$$("#tabs button").forEach(x=>x.classList.toggle("on",x===b));$$("[data-pane]").forEach(p=>p.classList.toggle("hide",p.dataset.pane!==tab));renderPanel()};
+
+function renderPanel(){
+  const n=$("#panelNotice");
+  if(!S.db) n.innerHTML=`<div class="notice">El panel guarda los datos en la nube de esta página. Ábrela con tu cuenta de Claude para ver y editar facturas, precios y averías.</div>`;
+  else if(!S.canEdit) n.innerHTML=`<div class="notice">Tienes acceso de solo lectura. Las facturas y averías solo las ven y editan los responsables de DRESAPLAST.</div>`;
+  else n.innerHTML="";
+  renderKPIs();renderInvoices();renderPrices();renderAverias();
+}
+
+/* --- facturación --- */
+const tot = f => (+f.base||0)*(1+(+f.iva||0)/100);
+function byYear(){const m={};S.facturas.forEach(f=>{const y=(f.fecha||"").slice(0,4);if(!y)return;(m[y]=m[y]||{base:0,coste:0,n:0,total:0,pend:0});m[y].base+=+f.base||0;m[y].coste+=+f.coste||0;m[y].n++;m[y].total+=tot(f);if(f.estado!=="cobrada")m[y].pend+=tot(f)});return m}
+function renderKPIs(){
+  const now=new Date(), Y=now.getFullYear(), md=(now.getMonth()+1)*100+now.getDate();
+  const inYTD=(f,y)=>f.fecha&&+f.fecha.slice(0,4)===y&&(+f.fecha.slice(5,7))*100+(+f.fecha.slice(8,10))<=md;
+  const cur=S.facturas.filter(f=>inYTD(f,Y)), prev=S.facturas.filter(f=>inYTD(f,Y-1));
+  const sb=a=>a.reduce((s,f)=>s+(+f.base||0),0), sc=a=>a.reduce((s,f)=>s+(+f.coste||0),0);
+  const c=sb(cur),p=sb(prev),var_=p?((c-p)/p*100):null, ben=c-sc(cur), benP=p-sc(prev);
+  const pend=S.facturas.filter(f=>f.estado!=="cobrada").reduce((s,f)=>s+tot(f),0);
+  $("#kpis").innerHTML=[
+    ["Facturado "+Y+" (base)",eur0(c),var_==null?"Sin datos del año anterior":`<span class="${var_>=0?"up":"down"}">${var_>=0?"▲":"▼"} ${Math.abs(var_).toFixed(1)}%</span> vs mismo periodo ${Y-1}`],
+    ["Mismo periodo "+(Y-1),eur0(p),"hasta "+now.toLocaleDateString("es-ES",{day:"numeric",month:"short"})],
+    ["Beneficio "+Y,eur0(ben),c?`Margen ${(ben/c*100).toFixed(1)}% · ${Y-1}: ${eur0(benP)}`:"—"],
+    ["Pendiente de cobro",eur0(pend),S.facturas.filter(f=>f.estado!=="cobrada").length+" facturas (IVA incl.)"]
+  ].map(([k,v,s])=>`<div class="kpi"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
+  // chart
+  const months=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+  const ser=y=>months.map((_,i)=>S.facturas.filter(f=>f.fecha&&+f.fecha.slice(0,4)===y&&+f.fecha.slice(5,7)===i+1).reduce((s,f)=>s+(+f.base||0),0));
+  const a=ser(Y-1),b=ser(Y), mx=Math.max(1,...a,...b);
+  const C1="#C98A2E",C2="#2B6CB0";
+  $("#chartLegend").innerHTML=`<span><i style="background:${C1}"></i>${Y-1}</span><span><i style="background:${C2}"></i>${Y}</span>`;
+  const Wc=900,Hc=280,pl=60,pb=28,pt=10,cw=(Wc-pl-10)/12,bw=Math.min(22,(cw-10)/2);
+  const nice=Math.pow(10,Math.floor(Math.log10(mx))), top=Math.ceil(mx/nice)*nice;
+  const yv=v=>pt+(Hc-pt-pb)*(1-v/top);
+  let g="";
+  for(let i=0;i<=4;i++){const v=top*i/4,y=yv(v);g+=`<line x1="${pl}" x2="${Wc-10}" y1="${y}" y2="${y}" stroke="rgba(28,42,34,.09)"/><text x="${pl-8}" y="${y+4}" text-anchor="end">${v>=1000?(v/1000).toLocaleString("es-ES",{maximumFractionDigits:1})+"k":v.toFixed(0)}</text>`}
+  const bar=(x,v,c,lab)=>{const y=yv(v),h=Math.max(0,yv(0)-y);if(h<=0)return"";const r=Math.min(4,h,bw/2);return `<path d="M${x} ${y+h}V${y+r}q0 -${r} ${r} -${r}h${bw-2*r}q${r} 0 ${r} ${r}V${y+h}z" fill="${c}"/>`};
+  months.forEach((m,i)=>{const x=pl+i*cw+(cw-2*bw-2)/2;g+=bar(x,a[i],C1)+bar(x+bw+2,b[i],C2);g+=`<rect x="${pl+i*cw}" y="${pt}" width="${cw}" height="${Hc-pt-pb}" fill="transparent" data-tip="${m}: ${Y-1} ${eur(a[i])} · ${Y} ${eur(b[i])}"/><text x="${pl+i*cw+cw/2}" y="${Hc-8}" text-anchor="middle">${m}</text>`});
+  $("#chartWrap").innerHTML=S.facturas.length?`<svg class="chart" viewBox="0 0 ${Wc} ${Hc}">${g}</svg>`:`<p style="color:var(--muted)">Aún no hay facturas. Añádelas en Facturación o carga datos de ejemplo para ver cómo queda.</p>`;
+  // years
+  const ys=byYear(), ks=Object.keys(ys).sort().reverse();
+  $("#yearTable").innerHTML=`<tr><th>Año</th><th class="n">Facturas</th><th class="n">Base</th><th class="n">Total con IVA</th><th class="n">Coste</th><th class="n">Beneficio</th><th class="n">Margen</th><th class="n">Pendiente</th></tr>`+
+   (ks.length?ks.map(y=>{const d=ys[y],bn=d.base-d.coste;return `<tr><td><b>${y}</b></td><td class="n">${d.n}</td><td class="n">${eur(d.base)}</td><td class="n">${eur(d.total)}</td><td class="n">${eur(d.coste)}</td><td class="n">${eur(bn)}</td><td class="n">${d.base?(bn/d.base*100).toFixed(1)+"%":"—"}</td><td class="n">${eur(d.pend)}</td></tr>`}).join(""):`<tr><td colspan="8" style="color:var(--muted)">Sin datos todavía.</td></tr>`);
+}
+document.addEventListener("pointermove",e=>{const t=e.target.closest&&e.target.closest("[data-tip]"),tip=$("#tip");if(t){tip.textContent=t.dataset.tip;tip.style.left=Math.min(innerWidth-260,e.clientX+14)+"px";tip.style.top=(e.clientY+14)+"px";tip.style.opacity=1}else tip.style.opacity=0});
+
+function renderInvoices(){
+  const years=[...new Set(S.facturas.map(f=>(f.fecha||"").slice(0,4)).filter(Boolean))].sort().reverse();
+  const fy=$("#fYear"),cur=fy.value;fy.innerHTML=`<option value="">Todos los años</option>`+years.map(y=>`<option ${y===cur?"selected":""}>${y}</option>`).join("");
+  const st=$("#fState").value;
+  const list=S.facturas.filter(f=>(!fy.value||f.fecha?.startsWith(fy.value))&&(!st||f.estado===st)).sort((a,b)=>(b.fecha||"").localeCompare(a.fecha||""));
+  $("#invTable").innerHTML=`<tr><th>Nº</th><th>Fecha</th><th>Cliente</th><th>Concepto</th><th class="n">Base</th><th class="n">Total</th><th class="n">Beneficio</th><th>Estado</th><th></th></tr>`+
+   (list.length?list.map(f=>`<tr><td>${esc(f.numero)}${f.demo?' <span class="pill warn">ejemplo</span>':""}</td><td>${esc(f.fecha)}</td><td>${esc(f.cliente)}</td><td>${esc(f.concepto)}</td><td class="n">${eur(+f.base)}</td><td class="n">${eur(tot(f))}</td><td class="n">${eur((+f.base||0)-(+f.coste||0))}</td>
+    <td><span class="pill ${f.estado==="cobrada"?"ok":"warn"}">${f.estado==="cobrada"?"Cobrada":"Pendiente"}</span></td>
+    <td style="white-space:nowrap">${S.canEdit?`<button class="mini" data-pay="${f._id}">${f.estado==="cobrada"?"Marcar pendiente":"Marcar cobrada"}</button> <button class="mini" data-delinv="${f._id}">Borrar</button>`:""}</td></tr>`).join(""):`<tr><td colspan="9" style="color:var(--muted)">No hay facturas con este filtro.</td></tr>`);
+  const form=$("#invForm"); if(!form.fecha.value) form.fecha.value=new Date().toISOString().slice(0,10);
+  if(!form.numero.value){const y=new Date().getFullYear();const n=S.facturas.filter(f=>f.fecha?.startsWith(y)&&!f.demo).length+1;form.numero.value=`F${y}-${String(n).padStart(4,"0")}`}
+}
+$("#fYear").onchange=renderInvoices;$("#fState").onchange=renderInvoices;
+$("#invForm").onsubmit=async e=>{e.preventDefault();if(!guard())return;const f=Object.fromEntries(new FormData(e.target));
+  const d={numero:f.numero,fecha:f.fecha,cliente:f.cliente,concepto:f.concepto,base:+f.base,iva:+f.iva,coste:+f.coste||0,estado:f.estado,creada:new Date().toISOString()};
+  try{await S.db.collection("facturas").add(d);e.target.reset();toast("Factura guardada")}catch(err){toast(dbErr(err))}};
+document.addEventListener("click",async e=>{
+  const p=e.target.closest("[data-pay]");if(p&&guard()){const f=S.facturas.find(x=>x._id===p.dataset.pay);try{await S.db.doc("facturas/"+f._id).update({estado:f.estado==="cobrada"?"pendiente":"cobrada"})}catch(err){toast(dbErr(err))}}
+  const d=e.target.closest("[data-delinv]");if(d&&guard()){if(d.dataset.sure){try{await S.db.doc("facturas/"+d.dataset.delinv).delete();toast("Factura borrada")}catch(err){toast(dbErr(err))}}else{d.dataset.sure=1;d.textContent="¿Seguro?";setTimeout(()=>{delete d.dataset.sure;d.textContent="Borrar"},3000)}}
+});
+$("#demoBtn").onclick=async()=>{if(!guard())return;
+  const clientes=["Explotación Ganadera Valdés","SAT Vega del Esla","Finca Los Barrios","Agropecuaria Órbigo","Hnos. Fernández (Astorga)","Granja La Bañeza","Comunidad de Regantes Páramo"];
+  const Y=new Date().getFullYear(); let k=0; const ops=[];
+  for(const y of [Y-2,Y-1,Y]){for(let m=1;m<=12;m++){ if(y===Y&&m>new Date().getMonth()+1)break; const seas=[.4,.45,.7,1.2,1.6,1.8,1.7,1.3,.9,.6,.45,.4][m-1]*(y===Y?1.12:y===Y-1?1:.9);
+    for(let i=0;i<3;i++){const base=Math.round((900+Math.random()*1800)*seas*100)/100;k++;
+      ops.push({numero:`EJ-${y}-${String(k).padStart(3,"0")}`,fecha:`${y}-${String(m).padStart(2,"0")}-${String(3+i*9).padStart(2,"0")}`,cliente:clientes[k%clientes.length],concepto:"Material de riego",base,iva:21,coste:Math.round(base*(.58+Math.random()*.12)*100)/100,estado:(y<Y||m<new Date().getMonth())?"cobrada":(i?"pendiente":"cobrada"),demo:true})}}}
+  toast("Cargando ejemplos…");
+  for(const d of ops){try{await S.db.collection("facturas").add(d)}catch(err){toast(dbErr(err));return}}
+  toast("Datos de ejemplo cargados")};
+$("#demoDel").onclick=async()=>{if(!guard())return;const l=S.facturas.filter(f=>f.demo);for(const f of l){try{await S.db.doc("facturas/"+f._id).delete()}catch(e){}}toast(l.length+" ejemplos borrados")};
+
+/* --- precios --- */
+function renderPrices(){
+  const f=$("#cfgForm"); if(document.activeElement?.form!==f){f.descuento.value=S.cfg.descuento;f.margenMin.value=S.cfg.margenMin}
+  const a=S.analisis;
+  $("#analysisInfo").innerHTML=a?.fecha?`Último análisis automático: <b>${new Date(a.fecha).toLocaleString("es-ES")}</b>. ${esc(a.resumen||"")}`:"Datos iniciales de la investigación del 6 de noviembre de 2026. El análisis automático diario los irá actualizando.";
+  $("#priceTable").innerHTML=`<tr><th>Foto</th><th>Pieza</th><th>Competencia</th><th class="n">Más barato</th><th class="n">Tu coste</th><th class="n">Tu precio</th><th class="n">Margen</th><th>Estado</th></tr>`+
+   S.productos.map(p=>{const pr=pricing(p);const comps=(p.competidores||[]).slice().sort((x,y)=>x.precio-y.precio);
+    const st=pr.precio==null?`<span class="pill warn">Sin datos</span>`:pr.protegido?`<span class="pill bad">En margen mínimo</span>`:!(p.coste>0)?`<span class="pill warn">Falta coste</span>`:`<span class="pill ok">−${S.cfg.descuento}% vs competencia</span>`;
+    const mg=(pr.precio&&p.coste>0)?(((pr.precio/1.21)-p.coste)/(pr.precio/1.21)*100).toFixed(1)+"%":"—";
+    return `<tr><td>${p.fotoId?`<img src="${imgSrc(p.fotoId)}" alt="" style="width:56px;height:42px;object-fit:contain;background:#fff;border-radius:6px;border:1px solid var(--line)">`:""}${S.canUpload?`<br><button class="mini" data-photo="${esc(p.id)}">${p.fotoId?"Cambiar":"Subir"}</button>`:""}</td><td><b>${esc(p.nombre)}</b></td><td style="font-size:14px">${comps.map(c=>`${c.url?`<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.tienda)}</a>`:esc(c.tienda)}: ${eur(c.precio)}`).join("<br>")||"—"}</td>
+     <td class="n">${eur(pr.min)}</td>
+     <td class="n">${S.canEdit?`<input class="mini" style="width:90px;text-align:right" type="number" step="0.01" placeholder="sin IVA" value="${p.coste??""}" data-cost="${esc(p.id)}">`:eur(p.coste)}</td>
+     <td class="n"><b>${eur(pr.precio)}</b></td><td class="n">${mg}</td><td>${st}</td></tr>`}).join("");
+  const ts=a?.masVendidos||[];
+  if(ts.length) $("#topSellers").innerHTML=`<ol style="padding-left:20px">${ts.map(t=>`<li>${esc(t.nombre||t)}${t.donde?` <span style="color:var(--muted)">· ${esc(t.donde)}</span>`:""}</li>`).join("")}</ol>`;
+}
+$("#cfgForm").onsubmit=async e=>{e.preventDefault();if(!guard())return;const f=new FormData(e.target);const d={descuento:+f.get("descuento"),margenMin:+f.get("margenMin")};
+  try{await S.db.doc("config/precios").set(d);toast("Regla guardada · precios recalculados")}catch(err){toast(dbErr(err))}};
+document.addEventListener("change",async e=>{const c=e.target.dataset?.cost;if(!c||!guard())return;const v=e.target.value===""?null:+e.target.value;
+  try{await S.db.doc("productos/"+c).update({coste:v});toast("Coste guardado (precio de coste sin IVA; el margen se calcula sobre el precio sin IVA)")}catch(err){toast(dbErr(err))}});
+
+/* --- averías --- */
+const COLS=[["nueva","Nuevas"],["curso","En curso"],["resuelta","Resueltas"]];
+function renderAverias(){
+  $("#kanban").innerHTML=COLS.map(([k,n])=>{const l=S.averias.filter(a=>(a.estado||"nueva")===k).sort((a,b)=>(a.prioridad==="Urgente"?-1:0)-(b.prioridad==="Urgente"?-1:0)||(b.creada||"").localeCompare(a.creada||""));
+   return `<div class="col"><h4>${n} · ${l.length}</h4>${l.map(a=>`<div class="av"><b>${esc(a.finca)}</b><div class="meta">${esc(a.cliente)}${a.municipio?" · "+esc(a.municipio):""} · ${new Date(a.creada).toLocaleDateString("es-ES")}</div>
+    <span class="pill ${a.prioridad==="Urgente"?"bad":a.prioridad==="Baja"?"ok":"warn"}">${esc(a.prioridad)}</span> <span style="font-size:14px">${esc(a.tipo)}</span>
+    ${a.desc?`<div style="margin-top:6px;color:var(--ink2)">${esc(a.desc)}</div>`:""}${a.tecnico?`<div class="meta">Técnico: ${esc(a.tecnico)}</div>`:""}
+    ${S.canEdit?`<div class="acts">${COLS.filter(c=>c[0]!==k).map(c=>`<button class="mini" data-mv="${a._id}" data-to="${c[0]}">→ ${c[1]}</button>`).join("")}<button class="mini" data-delav="${a._id}">Borrar</button></div>`:""}</div>`).join("")||`<p style="color:var(--muted);font-size:14px;padding:6px">Nada por aquí.</p>`}</div>`}).join("");
+  const cnt={};S.averias.forEach(a=>cnt[a.tipo]=(cnt[a.tipo]||0)+1);const ent=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);const mx=Math.max(1,...ent.map(e=>e[1]));
+  $("#avStats").innerHTML=ent.length?ent.map(([t,n])=>`<div class="r"><span>${esc(t)}</span><span class="t"><i style="width:${n/mx*100}%"></i></span><b>${n}</b></div>`).join(""):`<p style="color:var(--muted)">Cuando registres averías verás aquí cuáles se repiten.</p>`;
+}
+$("#avForm").onsubmit=async e=>{e.preventDefault();if(!guard())return;const d=Object.fromEntries(new FormData(e.target));d.estado="nueva";d.creada=new Date().toISOString();
+  try{await S.db.collection("averias").add(d);e.target.reset();toast("Parte abierto")}catch(err){toast(dbErr(err))}};
+document.addEventListener("click",async e=>{
+  const m=e.target.closest("[data-mv]");if(m&&guard()){try{await S.db.doc("averias/"+m.dataset.mv).update({estado:m.dataset.to,actualizada:new Date().toISOString()})}catch(err){toast(dbErr(err))}}
+  const d=e.target.closest("[data-delav]");if(d&&guard()){if(d.dataset.sure){try{await S.db.doc("averias/"+d.dataset.delav).delete()}catch(err){toast(dbErr(err))}}else{d.dataset.sure=1;d.textContent="¿Seguro?";setTimeout(()=>{delete d.dataset.sure;d.textContent="Borrar"},3000)}}
+});
+
+function guard(){if(!S.db){toast("Abre la página con tu cuenta para guardar");return false}if(!S.canEdit){toast("Solo los responsables pueden editar");return false}return true}
+function dbErr(e){return e?.code==="quota_exceeded"?"Base de datos llena: borra registros antiguos":e?.code==="invalid_argument"?"No tienes permiso para guardar esto":"No se pudo guardar, inténtalo de nuevo"}
+
+/* ================= ARRANQUE ================= */
+renderShop();renderCart();route();
+
+(async()=>{
+  if(!window.claude||!claude.use){ // versión estática (GitHub Pages): catálogo desde data/productos.json
+    try{const r=await fetch("data/productos.json",{cache:"no-cache"}); if(r.ok){const j=await r.json(); const ord=FALLBACK.map(p=>p.id);
+      if(j.productos&&j.productos.length) S.productos=j.productos.sort((a,b)=>((ord.indexOf(a.id)+1||999)-(ord.indexOf(b.id)+1||999))||String(a.nombre).localeCompare(String(b.nombre),'es',{numeric:true}));
+      if(j.cfg) S.cfg={...S.cfg,...j.cfg}; if(j.analisis) S.analisis=j.analisis; renderShop(); renderCart(); renderPrices();}}catch(e){}
+    return;}
+  claude.use("sample").then(s=>{if(s){S.sample=s;$("#botMode").textContent="Con IA · resuelve averías paso a paso"}}).catch(()=>{});
+  const [db,user]=await Promise.all([claude.use("db").catch(()=>null),claude.use("user").catch(()=>null)]);
+  if(!db){renderPanel();return}
+  S.db=db;
+  try{ if(user){ const ce=await user.canEdit(); S.canEdit = ce===null||ce===undefined ? true : !!ce; } }catch(e){}
+  if(!user) S.canEdit=true; // sin información de nivel: se intenta y el servidor decide
+  try{const as=await claude.use("assets");if(as&&S.canEdit){S.assets=as;S.canUpload=true;renderShop();}}catch(e){}
+  const loadT=setTimeout(()=>toast("Los datos tardan en llegar; puede que veas precios de la última carga"),10000);
+  db.collection("productos").onSnapshot(s=>{clearTimeout(loadT);if(!s.empty){const ord=FALLBACK.map(p=>p.id);S.productos=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>((ord.indexOf(a.id)+1||999)-(ord.indexOf(b.id)+1||999))||String(a.nombre).localeCompare(String(b.nombre),'es',{numeric:true}));renderShop();renderCart();renderPrices()}},()=>{});
+  db.doc("config/precios").onSnapshot(s=>{if(s.exists){S.cfg={...S.cfg,...s.data()};renderShop();renderCart();renderPrices()}},()=>{});
+  db.doc("config/web").onSnapshot(s=>{S.heroFotoId=s.exists?s.data().heroFotoId||null:null;renderShop()},()=>{});
+  db.doc("analisis/ultimo").onSnapshot(s=>{if(s.exists){S.analisis=s.data();renderShop();renderPrices()}},()=>{});
+  db.collection("facturas").onSnapshot(s=>{S.facturas=s.docs.map(d=>({_id:d.id,...d.data()}));if(!$("#panel").classList.contains("hide")){renderKPIs();renderInvoices()}},()=>{});
+  db.collection("averias").onSnapshot(s=>{S.averias=s.docs.map(d=>({_id:d.id,...d.data()}));if(!$("#panel").classList.contains("hide"))renderAverias()},()=>{});
+  renderPanel();
+})();
+</script>
+
+<script>
+(()=>{
+/* ---- Corte del subsuelo con sondeo que baja al hacer scroll ---- */
+const svg=document.getElementById("drillSvg");if(!svg)return;
+const L=[{n:"TIERRA VEGETAL",h:70,c:"#8A6A45"},{n:"ARCILLAS",h:150,c:"#B88B5A"},{n:"GRAVAS Y ARENAS",h:160,c:"#C9B48A"},{n:"ACUÍFERO",h:200,c:"#9CC3E6"},{n:"ROCA",h:180,c:"#7C8580"}];
+let y=0,g='<defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="rgba(0,0,0,.18)"/></pattern><pattern id="wv" width="24" height="10" patternUnits="userSpaceOnUse"><path d="M0 5q6-5 12 0t12 0" stroke="rgba(255,255,255,.7)" fill="none" stroke-width="1.4"/></pattern></defs>';
+g+='<rect x="0" y="0" width="520" height="40" fill="#EAF2F8"/><path d="M0 40h520" stroke="#14352A" stroke-width="2"/>';
+g+='<g stroke="#4F7A3A" stroke-width="2" fill="none">'+Array.from({length:14},(_,i)=>`<path d="M${20+i*36} 40l-4-12M${20+i*36} 40l3-14M${20+i*36} 40l8-10"/>`).join("")+'</g>';
+const tops=[];L.forEach((l,i)=>{const t=40+y;tops.push(t);g+=`<rect x="0" y="${t}" width="520" height="${l.h}" fill="${l.c}"/><rect x="0" y="${t}" width="520" height="${l.h}" fill="url(#${i==3?'wv':'dots'})" opacity="${i==3?.9:.6}"/><path d="M0 ${t+l.h}c90 ${i%2?8:-8} 170 ${i%2?-6:6} 260 0s170 ${i%2?8:-6} 260 0" stroke="rgba(20,53,42,.35)" fill="none"/><text x="506" y="${t+22}" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="12" fill="${i==3?'#14352A':'rgba(255,255,255,.92)'}">${l.n}</text>`;y+=l.h});
+const wt=tops[3]+46;g+=`<path d="M0 ${wt}h520" stroke="#2B6CB0" stroke-width="2" stroke-dasharray="8 6"/><text x="14" y="${wt-6}" font-family="IBM Plex Mono,monospace" font-size="11" fill="#14352A">▽ NIVEL FREÁTICO</text>`;
+g+='<g id="rig"><path d="M238 40V-0M282 40V0M238 4h44M244 14l32 18M276 14l-32 18" stroke="#14352A" stroke-width="3" fill="none"/></g>';
+g+='<rect id="bore" x="252" y="40" width="16" height="0" fill="#F4F1EA" stroke="#14352A" stroke-width="1.5"/><g id="bit"><path d="M252 40h16l-8 14z" fill="#14352A"/></g>';
+g+='<g id="pump" opacity="0"><rect x="250" y="0" width="20" height="34" rx="3" fill="#2B6CB0"/><text x="276" y="14" font-family="IBM Plex Mono,monospace" font-size="11" fill="#14352A">BOMBA</text></g>';
+g+='<g id="up" opacity="0"></g>';
+svg.innerHTML=g;
+const bore=svg.querySelector("#bore"),bit=svg.querySelector("#bit"),pump=svg.querySelector("#pump"),up=svg.querySelector("#up"),lbl=document.getElementById("drillLbl"),box=document.getElementById("drill"),items=[...document.querySelectorAll("#svcs li")];
+const maxD=tops[3]+120-40;
+for(let i=0;i<9;i++)up.innerHTML+=`<circle cx="${256+(i%3)*4}" cy="0" r="2.4" fill="#2B6CB0"/>`;
+let ph=0;
+function upd(){const r=box.getBoundingClientRect(),vh=innerHeight;let p=(vh*0.75-r.top)/(r.height*0.9);p=Math.max(0,Math.min(1,p));
+ const d=maxD*Math.min(1,p/0.85);bore.setAttribute("height",d);bit.setAttribute("transform",`translate(0 ${d})`);
+ const yb=40+d;let k=-1;tops.forEach((t,i)=>{if(yb>=t)k=i});lbl.textContent=k<0?"SUPERFICIE":L[k].n+(k==3?" · AGUA":"");
+ const done=p>=0.85;pump.setAttribute("opacity",done?1:0);pump.setAttribute("transform",`translate(0 ${yb-44})`);up.setAttribute("opacity",done?1:0);
+ const step=k<0?0:k<2?0:k==2?2:3;items.forEach(li=>li.classList.toggle("on",p>0.05&&+li.dataset.l==step));}
+function loop(){ph=(ph+2)%1000;const top=40,bot=parseFloat(bore.getAttribute("height"))+40-44;up.querySelectorAll("circle").forEach((c,i)=>{const t=((ph+i*40)%360)/360;c.setAttribute("cy",bot-(bot-top)*t)});requestAnimationFrame(loop)}
+addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd();if(!matchMedia("(prefers-reduced-motion:reduce)").matches)loop();
+
+/* ---- Pasos: barra que se rellena al entrar ---- */
+const st=document.getElementById("steps");new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&st.classList.add("in")),{threshold:.4}).observe(st);
+
+/* ---- Horario: abierto ahora ---- */
+const now=new Date(new Date().toLocaleString("en-US",{timeZone:"Europe/Madrid"}));const d=now.getDay(),m=now.getHours()*60+now.getMinutes();
+document.querySelectorAll("#hours tr").forEach(tr=>{if(tr.dataset.d.split(",").map(Number).includes(d))tr.classList.add("today")});
+const open=(d>=1&&d<=5&&m>=480&&m<1170)||(d==6&&m>=540&&m<840);const on=document.getElementById("openNow");on.classList.toggle("on",open);on.querySelector("span").textContent=open?"Abierto ahora":"Cerrado ahora · guardia técnica 24 h";
+
+/* ---- Formulario: abre el correo ---- */
+const f=document.getElementById("cform"),nb=[...document.querySelectorAll("#needs button")];let need="";
+nb.forEach(b=>b.onclick=()=>{nb.forEach(x=>x.classList.remove("on"));b.classList.add("on");need=b.textContent});
+document.querySelectorAll("[data-need]").forEach(b=>b.onclick=()=>{const t=nb.find(x=>x.textContent===b.dataset.need);t&&t.click();document.getElementById("contacto").scrollIntoView({behavior:"smooth"})});
+f.onsubmit=e=>{e.preventDefault();const v=Object.fromEntries(new FormData(f));const body=`Nombre: ${v.nombre}\nContacto: ${v.contacto}\nNecesidad: ${need||"—"}\n\n${v.texto||""}`;location.href=`mailto:dresaplast@dresaplast.com?subject=${encodeURIComponent("Consulta web · "+(need||"General"))}&body=${encodeURIComponent(body)}`};
+})();
+</script>
+</body>
+</html>
